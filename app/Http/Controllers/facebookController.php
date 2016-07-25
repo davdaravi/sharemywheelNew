@@ -23,7 +23,7 @@ class facebookController extends Controller
     {
         if(\Session::has('userId'))
         {
-            return redirect()->back();
+            return redirect('/ridelist');
         }
         return Socialite::driver('facebook')->redirect();
     }

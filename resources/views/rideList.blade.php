@@ -180,7 +180,12 @@ var numberNotChecked =$('input[name="carComfort[]"]').not(':checked').length;
 $(document).ready(function() {
     @if(isset($_COOKIE['ridedate']))
         alert('{{$_COOKIE['ridedate']}}');
+        alert('{{$_COOKIE['fromcity']}}');
+        alert('{{$_COOKIE['tocity']}}');
+        alert('{{$_COOKIE['fromplace']}}');
+        alert('{{$_COOKIE['toplace']}}');
     @endif
+
     $("input[name='ridetype']").click(function(){
         rideTable.fnDraw();
     });
