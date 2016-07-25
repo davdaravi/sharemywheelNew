@@ -1,6 +1,6 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default afterLogin">
     <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
-	<div class="container">
+	<div class="container-fluid">
         <div class="container-fluid xs-PLR0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -17,13 +17,13 @@
                 		<p class="logoContent">ShareMyWheel</p>
                 	</div>
                 </a>
-                <a href="{{url('/findride')}}" class="btn btn-info margin-top-5">Find a ride</a>&nbsp;<label style="color:black">or&nbsp;</label> 
-                <a href="{{url('/offerride')}}" class="btn btn-success margin-top-5">Offer a ride</a>
+                <a href="{{url('/findride')}}" class="btn btn-info btn-sm margin-top-5">Find a ride</a>&nbsp;<label style="color:black">or&nbsp;</label> 
+                <a href="{{url('/offerride')}}" class="btn btn-success btn-sm margin-top-5">Offer a ride</a>
             </div>
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="wallet text-center">
+                    <li class="wallet">
                         <i class="zmdi zmdi-card zmdi-hc-fw"></i>
                         <div>
                             <span>My Wallet</span>

@@ -127,7 +127,7 @@ footer.footer ul li a{  color: #0D606D;}
 .filter_div_height
 {
     height: 120px;
-    overflow: scroll;
+    overflow: auto;
 }
 .margin-top-5{margin-top:5px!important;}
 .margin-top-10{margin-top:10px!important;}
@@ -584,3 +584,130 @@ small{
 .coupan-code h4{ padding-bottom: 15px; border-bottom: 3px solid #009688; display: inline-block;}
 .coupan-code .amount-div{ margin-top: 20px; margin-bottom: 30px;}
 .coupan-code .amount-div .col-md-4{ padding-left: 0px;}
+
+/* -------------------------------- Responsive Design ---------------------------------- */
+@media only screen and (max-width: 910px){
+    .afterLogin .btn.btn-sm{
+        padding: 5px 6px;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .bannerImage {
+        height: 188px;
+        overflow: hidden;
+    }
+    .carImages img{
+        width: 200px;
+        margin: 0 auto;
+        text-align: center;
+        float: right;
+    }
+    .carImages {
+        margin-top: -58px;
+    }
+    footer.footer .col-md-12{
+        padding: 0px;
+    }
+    footer.footer ul{
+        padding:0px;
+    }
+    .logoContent {
+        margin-top: 5px;
+    }
+    .searchForm {
+        margin-top: -148px;
+        width: 315px;
+    }
+    .homePage .carImages {
+        margin-top: -184px;
+    }
+    .afterLogin .navbar-header{
+        margin-bottom: 5px;
+        margin-top: 7px;
+    }
+}
+
+@media only screen and (max-width: 630px){
+    .footer {
+        background: #F9B316;
+        position: relative;
+        bottom: 0;
+    }
+    .logoContent{margin-left:5px;font-size:12px;}
+    .mainLogo {
+        margin-top: -10px;
+    }
+    .footer{
+        height: auto;
+    }
+    .poweredBy {
+        line-height: 1.5em;
+        text-align: center;
+    }
+    footer.footer ul li {
+        display: inline-block;
+        margin-left: 16px;
+        width: 40%;
+    }
+    .bannerImage {
+        height: 156px;
+        overflow: hidden;
+    }
+}
+
+
+@media only screen and (max-width: 480px){
+    .footer {
+        background: #F9B316;
+        position: relative;
+        bottom: 0;
+    }
+    .logoContent{margin-left:5px;font-size:12px;}
+    .mainLogo {
+        margin-top: -10px;
+    }
+    .footer{
+        height: auto;
+    }
+    .poweredBy {
+        line-height: 1.5em;
+        text-align: center;
+    }
+    footer.footer ul li {
+        display: inline-block;
+        margin-left: 16px;
+        width: 40%;
+    }
+    .bannerImage {
+        height: 113px;
+        overflow: hidden;
+    }
+    .navbar.navbar-default .container-fluid{
+        padding:0px;
+    }
+    .searchForm {
+        margin-top: -90px;
+    }
+    .afterLogin .btn.btn-info{
+        margin-left: 14%;
+    }
+    .wallet {
+        margin-right: 15px;
+        margin-top: 5px;
+        margin-left: 18px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width:1280px){
+    .bannerImage {
+        position: relative;
+        background: #fff;
+        height: 245px;
+        overflow: hidden;
+    }
+    .afterLogin .navbar-header{
+        margin-bottom: 5px;
+        margin-top: 7px;
+    }
+}
