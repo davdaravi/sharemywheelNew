@@ -19,10 +19,10 @@ smw.ajaxcall=function(data,responsefunction,param){
 		statusCode: {
 		    400: function() {
 		       // Only if your server returns a 403 status code can it come in this block. :-)
-		       $.toaster({ priority : 'danger', title : 'Title', message : 'Bad Request'});
+		       $.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
 		    },
 		    404: function() {
-		    	$.toaster({ priority : 'danger', title : 'Title', message : 'Bad Request'});
+		    	$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
 		    },
 		    501: function(){
 		    	$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});	
@@ -30,7 +30,7 @@ smw.ajaxcall=function(data,responsefunction,param){
 		},
 		error:function(response)
 		{
-			$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
+			//$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
 		},
 		complete:function(){
 			//removeOverlay();
@@ -48,7 +48,7 @@ smw.ajaximagecall=function(data,responsefunction){
 		contentType : false,
         processData : false,
 		beforeSend:function(){
-			
+			$('.main').append('<div class="overlay"><div class="overlayImage"></div></div>');
 		},
 		success:function(response){
 			responsefunction(response);		
@@ -56,10 +56,10 @@ smw.ajaximagecall=function(data,responsefunction){
 		statusCode: {
 		    400: function() {
 		       // Only if your server returns a 403 status code can it come in this block. :-)
-		       $.toaster({ priority : 'danger', title : 'Title', message : 'Bad Request'});
+		       $.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
 		    },
 		    404: function() {
-		    	$.toaster({ priority : 'danger', title : 'Title', message : 'Bad Request'});
+		    	$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
 		    },
 		    501: function(){
 		    	$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});	
@@ -67,10 +67,11 @@ smw.ajaximagecall=function(data,responsefunction){
 		},
 		error:function(response)
 		{
-			$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
+			//$.toaster({ priority : 'danger', title : 'Title', message : 'Please try again'});
 		},
 		complete:function(){
 			//removeOverlay();
+			$('.overlay').remove();
 		}
 	});
 };
@@ -319,6 +320,7 @@ smw.responsUploadImage=function(resp){
 	}
 	else if(resp['status']==true)
 	{
+		$("#profile_pic").val('');
 		$.toaster({ priority : resp['class'], title : 'Title', message : resp['message']});
 		if(resp['path']=='default.png')
 		{
@@ -353,6 +355,7 @@ smw.responsUploadLicenceImage=function(resp){
 	}
 	else if(resp['status']==true)
 	{
+		$("#licence_pic").val('');
 		$.toaster({ priority : resp['class'], title : 'Title', message : resp['message']});
 		if(resp['path']=='no_licence.png')
 		{

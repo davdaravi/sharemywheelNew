@@ -47,7 +47,7 @@
                 <div class="form-group col-lg-4 col-md-4 col-sm-5 margin-top-10">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-pin zmdi-hc-lg zmdi-green"></i></span>
-                        <input type="text" name="from" id="from" value="@if(isset($_COOKIE['fromoriginal'])){{$_COOKIE['fromoriginal']}}@elseif(isset($ride['from'])){{$ride['from']}}@else{{""}}@endif" class="form-control" placeholder="From" />   
+                        <input type="text" name="from" id="from" value="@if(isset($ride['from'])){{$ride['from']}}@elseif(isset($_COOKIE['fromoriginal'])){{$_COOKIE['fromoriginal']}}@else{{""}}@endif" class="form-control" placeholder="From" />   
                     </div>
                 </div>
                 <div class="col-lg-1 text-center margin-top-10">
@@ -56,18 +56,18 @@
                 <div class="form-group col-lg-4 col-md-4 col-sm-5 margin-top-10">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-pin zmdi-hc-lg zmdi-red"></i></span>
-                        <input type="text" name="to" id="to" class="form-control" value="@if(isset($_COOKIE['tooriginal'])){{$_COOKIE['tooriginal']}}@elseif(isset($ride['to'])){{$ride['to']}}@else{{""}}@endif" placeholder="To" /> 
+                        <input type="text" name="to" id="to" class="form-control" value="@if(isset($ride['to'])){{$ride['to']}}@elseif(isset($_COOKIE['tooriginal'])){{$_COOKIE['tooriginal']}}@else{{""}}@endif" placeholder="To" /> 
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 margin-top-10">
                     <input type="button" class="btn btn-primary" name="submitBtn" id="submitBtn" value="Search"/>
                 </div>
-                <input type="hidden" name="fromvalue" id="fromvalue" value="@if(isset($_COOKIE['fromoriginal'])){{$_COOKIE['fromoriginal']}}@elseif(isset($ride['from'])){{$ride['from']}}@else{{""}}@endif"/>
-                <input type="hidden" name="tovalue" id="tovalue" value="@if(isset($_COOKIE['tooriginal'])){{$_COOKIE['tooriginal']}}@elseif(isset($ride['to'])){{$ride['to']}}@else{{""}}@endif"/>
-                <input type="hidden" name="fromcity" id="fromcity" value="@if(isset($_COOKIE['fromcity'])){{$_COOKIE['fromcity']}}@elseif(isset($ride['fromcity'])){{$ride['fromcity']}}@else{{""}}@endif"/>
-                <input type="hidden" name="fromplace" id="fromplace" value="@if(isset($_COOKIE['fromplace'])){{$_COOKIE['fromplace']}}@elseif(isset($ride['fromplace'])){{$ride['fromplace']}}@else{{""}}@endif"/>
-                <input type="hidden" name="tocity" id="tocity" value="@if(isset($_COOKIE['tocity'])){{$_COOKIE['tocity']}}@elseif(isset($ride['tocity'])){{$ride['tocity']}}@else{{""}}@endif"/>
-                <input type="hidden" name="toplace" id="toplace" value="@if(isset($_COOKIE['toplace'])){{$_COOKIE['toplace']}}@elseif(isset($ride['toplace'])){{$ride['toplace']}}@else{{""}}@endif"/>
+                <input type="hidden" name="fromvalue" id="fromvalue" value="@if(isset($ride['from'])){{$ride['from']}}@elseif(isset($_COOKIE['fromoriginal'])){{$_COOKIE['fromoriginal']}}@else{{""}}@endif"/>
+                <input type="hidden" name="tovalue" id="tovalue" value="@if(isset($ride['to'])){{$ride['to']}}@elseif(isset($_COOKIE['tooriginal'])){{$_COOKIE['tooriginal']}}@else{{""}}@endif"/>
+                <input type="hidden" name="fromcity" id="fromcity" value="@if(isset($ride['fromcity'])){{$ride['fromcity']}}@elseif(isset($_COOKIE['fromcity'])){{$_COOKIE['fromcity']}}@else{{""}}@endif"/>
+                <input type="hidden" name="fromplace" id="fromplace" value="@if(isset($ride['fromplace'])){{$ride['fromplace']}}@elseif(isset($_COOKIE['fromplace'])){{$_COOKIE['fromplace']}}@else{{""}}@endif"/>
+                <input type="hidden" name="tocity" id="tocity" value="@if(isset($ride['tocity'])){{$ride['tocity']}}@elseif(isset($_COOKIE['tocity'])){{$_COOKIE['tocity']}}@else{{""}}@endif"/>
+                <input type="hidden" name="toplace" id="toplace" value="@if(isset($ride['toplace'])){{$ride['toplace']}}@elseif(isset($_COOKIE['toplace'])){{$_COOKIE['toplace']}}@else{{""}}@endif"/>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                 <input type="hidden" name="token" value="{{config('app.token')}}"/>
             </form>
@@ -82,7 +82,7 @@
         <div class="col-md-3 sharingRideFilter">
             <div class="col-md-12">
                 <label class="control-label">Date :</label>
-                <input type="text" id="fromdate" name="fromdate" value="@if(isset($_COOKIE['ridedate'])){{$_COOKIE['ridedate']}}@elseif(isset($ride['date'])){{$ride['date']}}@else{{""}}@endif" placeholder="Select Date" class="form-control"/>
+                <input type="text" id="fromdate" name="fromdate" value="@if(isset($ride['date'])){{$ride['date']}}@elseif(isset($_COOKIE['ridedate'])){{$_COOKIE['ridedate']}}@else{{""}}@endif" placeholder="Select Date" class="form-control"/>
             </div>
             <div class="clearfix"></div><hr/>
 
@@ -113,7 +113,7 @@
             <div class="clearfix"></div><hr/>
 
             <div class="col-md-12 margin-top-5 filter_div_height">
-                <label class="control-label">Car Confort :</label>
+                <label class="control-label">Car Comfort :</label>
                 <div>
                     <label><input type="checkbox" class="comfortAll" style="vertical-align:inherit" name="carComfortall" value="all"/><span class="PD10">All</span></label>
                 </div>
@@ -178,12 +178,28 @@ var comfortArray=Array();
 var numberNotChecked =$('input[name="carComfort[]"]').not(':checked').length;
 
 $(document).ready(function() {
-    @if(isset($_COOKIE['ridedate']))
-        alert('{{$_COOKIE['ridedate']}}');
-        alert('{{$_COOKIE['fromcity']}}');
-        alert('{{$_COOKIE['tocity']}}');
-        alert('{{$_COOKIE['fromplace']}}');
-        alert('{{$_COOKIE['toplace']}}');
+    @if(isset($_COOKIE['fromcity']))
+        alert("fromcity"+'{{$_COOKIE['fromcity']}}');
+    @endif
+
+    @if(isset($_COOKIE['fromplace']))
+        alert("fromplace"+'{{$_COOKIE['fromplace']}}');
+    @endif
+
+    @if(isset($_COOKIE['fromoriginal']))
+        alert("fromoriginal"+'{{$_COOKIE['fromoriginal']}}');
+    @endif
+
+    @if(isset($_COOKIE['tocity']))
+        alert("tocity"+'{{$_COOKIE['tocity']}}');
+    @endif
+
+    @if(isset($_COOKIE['toplace']))
+        alert("toplace"+'{{$_COOKIE['toplace']}}');
+    @endif
+
+    @if(isset($_COOKIE['tooriginal']))
+        alert("tooriginal"+'{{$_COOKIE['tooriginal']}}');
     @endif
 
     $("input[name='ridetype']").click(function(){

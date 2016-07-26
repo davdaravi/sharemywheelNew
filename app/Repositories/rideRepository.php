@@ -9,10 +9,11 @@ use Mail;
 use Response;
 class rideRepository
 {
-    protected $request;
+    protected $request,$ip;
 	public function __construct(Request $request)
 	{
 		$this->request=$request;
+        $this->ip=$request->ip();
         //return redirect()->back()->withErrors(["error"=>"Could not add details! Please try again."]);
 	}
 	public function rideSearch()
@@ -79,53 +80,52 @@ class rideRepository
                             //setcookie($name, '', time()-1000, '/');
                         }
                     }*/
-                    if(isset($_COOKIE['fromplace']))
-                            setcookie("fromplace",'', time()-1000,'/');
+                    /*if(isset($_COOKIE['fromplace']))
+                            setcookie("fromplace",'', time()-1000,'/','www.smw.com');
 
                     if(isset($_COOKIE['fromcity']))
-                        setcookie("fromcity",'', time()-1000,'/');
+                        setcookie("fromcity",'', time()-1000,'/','www.smw.com');
                         
 
                     if(isset($_COOKIE['toplace']))
-                        setcookie("toplace",'', time()-1000,'/');
+                        setcookie("toplace",'', time()-1000,'/','www.smw.com');
 
                     if(isset($_COOKIE['tocity']))
-                        setcookie("tocity",'', time()-1000,'/');
+                        setcookie("tocity",'', time()-1000,'/','www.smw.com');
 
                     if(isset($_COOKIE['fromoriginal']))
-                        setcookie("fromoriginal",'', time()-1000,'/');
+                        setcookie("fromoriginal",'', time()-1000,'/','www.smw.com');
                         
                     if(isset($_COOKIE['tooriginal']))
-                        setcookie("tooriginal",'', time()-1000,'/');
+                        setcookie("tooriginal",'', time()-1000,'/','www.smw.com');
 
                     if(isset($_COOKIE['ridedate']))
-                        setcookie("ridedate",'', time()-1000,'/');
+                        setcookie("ridedate",'', time()-1000,'/','www.smw.com');*/
                     
-                    setcookie("fromplace", $fromplace, time()+3600);
-                    setcookie("fromcity", $fromcity, time()+3600);
-                    setcookie("toplace", $toplace, time()+3600);
-                    setcookie("tocity", $tocity, time()+3600);
-                    setcookie("fromoriginal",$request['from'],time()+3600);
-                    setcookie("tooriginal",$request['to'],time()+3600);
-
-                    setcookie("ridedate", $date, time()+3600);
+                    /*setcookie("fromplace", $fromplace, time()+3600,'/','www.smw.com');
+                    setcookie("fromcity", $fromcity, time()+3600,'/','www.smw.com');
+                    setcookie("toplace", $toplace, time()+3600,'/','www.smw.com');
+                    setcookie("tocity", $tocity, time()+3600,'/','www.smw.com');
+                    setcookie("fromoriginal",$request['from'],time()+3600,'/','www.smw.com');
+                    setcookie("tooriginal",$request['to'],time()+3600,'/','www.smw.com');
+                    setcookie("ridedate", $date, time()+3600,'/','www.smw.com');
 
                     if(isset($request['fromlat']))
                     {
-                        setcookie("fromlat",$request['fromlat'],time()+3600);
+                        setcookie("fromlat",$request['fromlat'],time()+3600,'/','www.smw.com');
                     }
                     if(isset($request['fromlng']))
                     {
-                        setcookie("fromlng",$request['fromlng'],time()+3600);
+                        setcookie("fromlng",$request['fromlng'],time()+3600,'/','www.smw.com');
                     }
                     if(isset($request['tolat']))
                     {
-                        setcookie("tolat",$request['tolat'],time()+3600);
+                        setcookie("tolat",$request['tolat'],time()+3600,'/','www.smw.com');
                     }
                     if(isset($request['tolng']))
                     {
-                        setcookie("tolng",$request['tolng'],time()+3600);
-                    }
+                        setcookie("tolng",$request['tolng'],time()+3600,'/','www.smw.com');
+                    }*/
                     
                     //select car comfort
                     $car_comfort=DB::table('comfort_master')->where('is_deleted',0)->get();
@@ -409,36 +409,36 @@ class rideRepository
                                 //setcookie($name, '', time()-1000, '/');
                             }
                         }*/
-                        if(isset($_COOKIE['fromplace']))
-                            setcookie("fromplace",'', time()-1000,'/');
+                        /*if(isset($_COOKIE['fromplace']))
+                            setcookie("fromplace",'', time()-1000,'/','www.smw.com');
 
                         if(isset($_COOKIE['fromcity']))
-                            setcookie("fromcity",'', time()-1000,'/');
+                            setcookie("fromcity",'', time()-1000,'/','www.smw.com');
                             
 
                         if(isset($_COOKIE['toplace']))
-                            setcookie("toplace",'', time()-1000,'/');
+                            setcookie("toplace",'', time()-1000,'/','www.smw.com');
 
                         if(isset($_COOKIE['tocity']))
-                            setcookie("tocity",'', time()-1000,'/');
+                            setcookie("tocity",'', time()-1000,'/','www.smw.com');
 
                         if(isset($_COOKIE['fromoriginal']))
-                            setcookie("fromoriginal",'', time()-1000,'/');
+                            setcookie("fromoriginal",'', time()-1000,'/','www.smw.com');
                             
                         if(isset($_COOKIE['tooriginal']))
-                            setcookie("tooriginal",'', time()-1000,'/');
+                            setcookie("tooriginal",'', time()-1000,'/','www.smw.com');
 
                         if(isset($_COOKIE['ridedate']))
-                            setcookie("ridedate",'', time()-1000,'/');
+                            setcookie("ridedate",'', time()-1000,'/','www.smw.com');*/
                         //set cookie
 
-                        setcookie("fromplace", $departPlace, time()+3600);
-                        setcookie("fromcity", $departurecity, time()+3600);
-                        setcookie("toplace", $arrivalPlace, time()+3600);
-                        setcookie("tocity", $arrivalcity, time()+3600);
-                        setcookie("fromoriginal",$departOrigin,time()+3600);
-                        setcookie("tooriginal",$arrivalOrigin,time()+3600);
-                        setcookie("ridedate", date("d-m-Y",strtotime($date)), time()+3600);
+                        setcookie("fromplace", $departPlace, time()+3600,'/');
+                        setcookie("fromcity", $departurecity, time()+3600,'/');
+                        setcookie("toplace", $arrivalPlace, time()+3600,'/');
+                        setcookie("tocity", $arrivalcity, time()+3600,'/');
+                        setcookie("fromoriginal",$departOrigin,time()+3600,'/');
+                        setcookie("tooriginal",$arrivalOrigin,time()+3600,'/');
+                        setcookie("ridedate", date("d-m-Y",strtotime($date)), time()+3600,'/');
 
                         $rideType=$request['ridetype'];
                         if($rideType=="ladies")
@@ -649,7 +649,7 @@ class rideRepository
                 $i = $iDisplayStart + 1;
                 foreach ($ridesData as $key => $value) {
                     // dd($value);
-                                    
+                    
                     $newrideData = array();
                     $message='<a href="ridedetail/'.$value->sourcename.'_'.$value->destinationname.'_'.$value->rideId.'" target="_blank">';
                     $message.='<div style="overflow:hidden"><div class="col-md-4 margin-top-5">';
@@ -670,8 +670,9 @@ class rideRepository
                     if($value->birthdate==""){
                         $message.='<h6>-</h6>';    
                     }
-                    else{
-                        $year=date_diff(date_create($value->birthdate), date_create('today'))->y;
+                    else
+                    {
+                        $year=date("Y")-$value->birthdate;
                         $message.='<h6>'.$year.' years old</h6>';    
                     }
 
@@ -1149,6 +1150,19 @@ class rideRepository
                                             }
                                         }
                                         //ends
+                                        //send default sms to user who has book this ride same as email
+                                        $msg='Dear '.$dd['bookedname'].' ,<br>Your ride has been successfully booked.below are the offer details.<br/>';
+                                        $msg.='Source :'.$dd['source'].'<br>';
+                                        $msg.='Destination :'.$dd['destination'].'<br>';
+                                        $msg.='Owner email :'.$dd['email'].'<br>';
+                                        $msg.='Seats book :'.$dd['seat'].'<br>';
+                                        $msg.='Time :'.$dd['time'].'<br>';
+                                        $msg.='Date :'.$dd['date'].'<br><br>';
+                                        $msg.='Enjoy your ride<br><br>';
+                                        $msg.='Thank you';
+                                        
+                                        DB::table('user_chat_messages')->insert(['fromUserId'=>$findride[0]->userId,"toUserId"=>session('userId'),"message"=>$msg,"ip"=>$this->ip]);
+
                                         $this->request->session()->flash('status', 'Your ride has been booked successfully');
                                         DB::commit();
                                         $response['message']    =   "success";

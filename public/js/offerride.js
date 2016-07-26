@@ -52,7 +52,7 @@ offerride.ajaxcall=function(data,responsefunction,param){
 		data:{json:JSON.stringify(data["data"])},
 		dataType:'json',
 		beforeSend:function(){
-			
+			$('.main').append('<div class="overlay"><div class="overlayImage"></div></div>');
 		},
 		success:function(response){
 			responsefunction(response,param);		
@@ -75,6 +75,7 @@ offerride.ajaxcall=function(data,responsefunction,param){
 		},
 		complete:function(){
 			//removeOverlay();
+			$('.overlay').remove();
 		}
 	});
 };
@@ -652,6 +653,7 @@ $('#daily').change(function() {
 });
 //----------------------------------------------------------------------------------
 $("#paybtn").click(function(){
+	$("#paybtn").attr("disabled",true);
 	$("#dailyride").modal('hide');
 	var payment_type="";                    
 	if($("#pay_wallet").is(":checked"))

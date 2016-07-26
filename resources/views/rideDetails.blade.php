@@ -93,7 +93,26 @@
                                 <th>Departure date</th>
                                 <td><i class="zmdi zmdi-calendar-note"></i> <?php echo date("l d F Y - H:i",strtotime($rideDetail[0]->departure_date))?></td>
                             </tr>
-
+                            <?php
+                            if($rideDetail[0]->is_round_trip==1 && $rideDetail[0]->isDaily==0 && $rideDetail[0]->return_date>'1971-01-01') 
+                            {?>
+                            <tr>
+                                <th>Return date</th>
+                                <td><i class="zmdi zmdi-calendar-note"></i> 
+                                <?php     
+                                    echo date("l d F Y - H:i",strtotime($rideDetail[0]->return_date));    
+                                ?>
+                                </td>
+                            </tr>
+                            <?php
+                            }
+                            ?>   
+                            @if($rideDetail[0]->is_round_trip==1 && $rideDetail[0]->isDaily==1)
+                            <tr>
+                                <th>Return Time</th>
+                                <td><i class="zmdi zmdi-calendar-note"></i> <?php echo date("H:i:s",strtotime($rideDetail[0]->return_time))?></td>
+                            </tr>
+                            @endif
                             <tr>
                                 <th>Details</th>
                                 <td>
@@ -269,7 +288,7 @@
                 </div>
                 <div class="col-md-8">
                     <label style="font-size:14px;font-weight:bold"><a href="{{route('get.profile',[$rideDetail[0]->userId,$rideDetail[0]->rideId])}}">{{ucwords($rideDetail[0]->first_name." ".$rideDetail[0]->last_name)}}</a></label><br/>
-                    <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate=="")@else{{date_diff(date_create($rideDetail[0]->birthdate), date_create('today'))->y." Years old"}}@endif</label><br/>
+                    <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate==""){{"-"}}@else{{(date("Y")-$rideDetail[0]->birthdate)." Years old"}}@endif</label><br/>
                     <div class="stars1" style="padding:0px;margin:0px">
                         @if($rideDetail[0]->rating==5)
                         <input type="radio" class="star1 star-5" name="rating" value="5" checked="checked"/><label class="star1 star-5"></label>                        
@@ -471,6 +490,7 @@ $(document).ready(function(){
         var dd=$("#pay_wallet").is(':checked');
         if(dd==false)
         {
+            $("#paybtn").prop("disabled",true);
             e.preventDefault(); 
             $.ajax({
                 async:false,
@@ -506,6 +526,7 @@ $(document).ready(function(){
         else
         {
             e.preventDefault(); 
+            $("#paybtn").prop("disabled",true);
             //wallet
             $.ajax({
                 async:false,
@@ -515,7 +536,7 @@ $(document).ready(function(){
                 data:{"ride":{{$rideDetail[0]->rideId}},"cost_seat":{{$rideDetail[0]->cost_per_seat}},"No_seats":$("#seats").val()},
                 dataType:'json',
                 beforeSend:function(){
-                    
+                    $('.main').append('<div class="overlay"><div class="overlayImage"></div></div>');
                 },
                 success:function(response){
                    window.location.reload();
@@ -527,6 +548,7 @@ $(document).ready(function(){
                 },
                 complete:function(){
                     //removeOverlay();
+                    $('.overlay').remove();
                 }
             });
         }

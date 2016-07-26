@@ -311,7 +311,7 @@
                 </div>
                 <div class="col-md-8">
                     <label style="font-size:14px;font-weight:bold"><a href="{{route('get.profile',[$rideDetail[0]->userId,$rideDetail[0]->rideId])}}">{{ucwords($rideDetail[0]->first_name." ".$rideDetail[0]->last_name)}}</a></label><br/>
-                    <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate=="")@else{{date_diff(date_create($rideDetail[0]->birthdate), date_create('today'))->y." Years old"}}@endif</label><br/>
+                    <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate==""){{"-"}}@else{{(date("Y")-$rideDetail[0]->birthdate)." Years old"}}@endif</label><br/>
                     <div class="stars1" style="padding:0px;margin:0px">
                         @if($rideDetail[0]->rating==5)
                         <input type="radio" class="star1 star-5" name="rating" value="5" checked="checked"/><label class="star1 star-5"></label>                        

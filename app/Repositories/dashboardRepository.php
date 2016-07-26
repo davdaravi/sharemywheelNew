@@ -456,7 +456,7 @@ class dashboardRepository
                 // dd($ridesData);
                 if (!empty($sSearch)) {
 
-                    $ridesData = $ridesData->whereRaw('(CONCAT(first_name," ",last_name) LIKE "%' . $sSearch . '%" or date_format(rides.departure_date,"%d-%m-%Y")  LIKE "%' . $sSearch . '%"  or rating LIKE "%' . $sSearch . '%" or rides.departureOriginal LIKE "%'.$sSearch.'%" or rides.arrivalOriginal LIKE "%'.$sSearch.'%" or rides.offer_seat LIKE "%'.$sSearch.'%" or rides.available_seat LIKE "%'.$sSearch.'%"  or rides.cost_per_seat LIKE "%'.$sSearch.'%")');
+                    $ridesData = $ridesData->whereRaw('(CONCAT(first_name," ",last_name) LIKE "%' . $sSearch . '%" or date_format(rides.departure_date,"%d-%m-%Y")  LIKE "%' . $sSearch . '%" or rides.departureOriginal LIKE "%'.$sSearch.'%" or rides.arrivalOriginal LIKE "%'.$sSearch.'%" or rides.offer_seat LIKE "%'.$sSearch.'%" or rides.available_seat LIKE "%'.$sSearch.'%"  or rides.cost_per_seat LIKE "%'.$sSearch.'%")');
                 }
 
                
@@ -481,12 +481,13 @@ class dashboardRepository
                 }
 
                 $ridesData = $ridesData->get();
+                
                 $iTotal = count($ridesData);
                 $ridesDataCount=count($ridesDataCount);
                 // Output
                 $output = array(
                     'sEcho' => intval($sEcho),
-                    'iTotalRecords' => intval($iTotal),
+                    'iTotalRecords' => intval($ridesDataCount),
                     'iTotalDisplayRecords' => intval($iTotal),
                     'aaData' => array()
                 );

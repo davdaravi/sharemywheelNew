@@ -68,7 +68,7 @@
                                     <img src="<?php echo asset($path)?>" width="80px" height="80px">
                                 </td>
                                 <td class="col-md-10 col-sm-10 col-xs-10">
-                                    <h4>{{ucwords($userDetail[0]->first_name." ".$userDetail[0]->last_name)}} <small><br>@if($userDetail[0]->birthdate=="")@else{{date_diff(date_create($userDetail[0]->birthdate), date_create('today'))->y." Years old"}}@endif</small></h4>
+                                    <h4>{{ucwords($userDetail[0]->first_name." ".$userDetail[0]->last_name)}} <small><br>@if($userDetail[0]->birthdate==""){{"-"}}@else{{(date("Y")-$userDetail[0]->birthdate)." Years old"}}@endif</small></h4>
                                     <div class="stars1" style="padding:0px;margin:0px">
                                         @if($userDetail[0]->rating==5)
                                         <input type="radio" class="star1 star-5" name="rating" value="5" checked="checked"/><label class="star1 star-5"></label>                        

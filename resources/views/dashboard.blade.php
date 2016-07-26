@@ -361,7 +361,7 @@
                 </li>
             </ul>
             <div class="tab-content col-md-8 col-sm-8 col-xs-12">
-                <div class="tab-pane active" id="bookingHistory" style="padding-top:0px">
+                <div class="tab-pane" id="bookingHistory" style="padding-top:0px">
                     <table id="bookingHistoryTable" class="table table-bordered table-hover" style="width:100%;">
                         <thead>
                             <tr>
@@ -374,7 +374,7 @@
                     </table>
                     
                 </div>
-                <div class="tab-pane" id="ridebooked" style="padding-top:0px">
+                <div class="tab-pane active" id="ridebooked" style="padding-top:0px">
                     <table id="ridebookedTable" class="table table-bordered table-hover" style="width:100%;">
                         <thead>
                             <tr>
@@ -909,7 +909,7 @@
                                 <option value="{{$i}}">{{$i}}</option>
                             @endfor
                         </select>
-                        <label id="carSeat" class="validation_error PD0"></label>
+                        <label id="carSeatError" class="validation_error PD0"></label>
                     </div>
                     <div class="clearfix"></div>
                     
@@ -917,7 +917,7 @@
                     <div class="col-md-6 margin-top-10">
                         <label>Car Image</label>
                         <input type="file" name="carImage" id="carImage" class="form-control" accept="image/gif, image/jpeg, image/png, image/gif" />
-                        <label id="carImage" class="validation_error PD0"></label>
+                        <label id="carImageError" class="validation_error PD0"></label>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -1144,6 +1144,7 @@
 
             $("#imagesubmitform").submit(function(e){
                 e.preventDefault();
+
                 var formData=new FormData(),
                     files    = $('#profile_pic').get(0).files;
                     $.each(files, function(i, file) {

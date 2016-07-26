@@ -138,8 +138,9 @@ Route::group(['middleware'=>['web','login']],function(){
             {
                 $mainCookies = explode('=', $cookie);
                 $name = trim($mainCookies[0]);
-                setcookie($name, '', time()-1000);
+                //setcookie($name, '', time()-1000);
                 setcookie($name, '', time()-1000, '/');
+                unset($_COOKIE[$name]);
             }
         }
         return redirect('/');
@@ -227,7 +228,10 @@ Route::group(['middleware'=>['web','login']],function(){
         'as'    =>  'post.send.mobile.code',
         'uses'  =>  'userController@sendMobileCode'
     ]);
-    
+    Route::post('/sendEmailCode',[
+        'as'    =>  'post.send.email.code',
+        'uses'  =>  'userController@sendEmailCode'
+    ]);
     Route::post('/carAdd',[
         'as'    =>  'post.car.add',
         'uses'  =>  'carController@addCar'
