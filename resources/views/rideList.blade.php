@@ -44,16 +44,16 @@
     <div class="col-md-12">
         <div class="sharingRideSearch">
             <form role="form">
-                <div class="form-group col-lg-4 col-md-4 col-sm-5 margin-top-10">
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 margin-top-10">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-pin zmdi-hc-lg zmdi-green"></i></span>
                         <input type="text" name="from" id="from" value="@if(isset($ride['from'])){{$ride['from']}}@elseif(isset($_COOKIE['fromoriginal'])){{$_COOKIE['fromoriginal']}}@else{{""}}@endif" class="form-control" placeholder="From" />   
                     </div>
                 </div>
-                <div class="col-lg-1 text-center margin-top-10">
+                <div class="col-lg-1 col-md-1 col-sm-1 text-center margin-top-10">
                     <button type="button" class="btn btn-primary" id="reverseBtn" name="reverseBtn"><i class="zmdi zmdi-repeat zmdi-hc-lg"></i></button>
                 </div>
-                <div class="form-group col-lg-4 col-md-4 col-sm-5 margin-top-10">
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 margin-top-10">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-pin zmdi-hc-lg zmdi-red"></i></span>
                         <input type="text" name="to" id="to" class="form-control" value="@if(isset($ride['to'])){{$ride['to']}}@elseif(isset($_COOKIE['tooriginal'])){{$_COOKIE['tooriginal']}}@else{{""}}@endif" placeholder="To" /> 

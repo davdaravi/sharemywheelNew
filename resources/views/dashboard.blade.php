@@ -402,7 +402,7 @@
                     <li class="ratingsGiven"><a href="#ratingsGiven" data-toggle="tab">Ratings Given</a>
                     </li>
                 </ul>
-                <div class="tab-content col-md-8">
+                <div class="tab-content col-md-8 col-sm-8 col-xs-12">
                     <div class="tab-pane active" id="exchangeRatings">
                         <div class="col-md-12">
                             <h4>Exchange ratings with another member</h4>
@@ -485,7 +485,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="personalInfo">
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
                                 <h3>Personal Information</h3>
                                 <hr/>
                                 <!--<form class="form-horizontal" name="userPersonalInfoForm" id="userPersonalInfoForm" role="form">-->
@@ -636,7 +636,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="tab-pane" id="preference">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-sm-9 col-xs-12">
                                 <h3>Preference</h3>
                                 <hr/>
                                 <form class="form-horizontal" role="form">
@@ -743,7 +743,7 @@
                         </div>
 
                         <div class="tab-pane" id="car">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-sm-9">
                                 <div class="col-md-12">
                                     <button type="button" data-toggle="modal" data-target="#addCar" class="btn btn-primary addCar">Add Car</button>
                                 </div>
@@ -780,10 +780,10 @@
 
                 <div class="row amount-div">
                     <div class="col-md-12">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-8 col-xs-8">
                             <input type="text" name="ccode" id="ccode" class="form-control input-sm" placeholder="Enter coupan code"/>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
                             <input type="button" id="coupan_apply_btn" name="coupan_apply_btn" class="btn btn-primary" value="Apply"/>
                         </div>
                     </div>
