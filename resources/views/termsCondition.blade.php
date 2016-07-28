@@ -16,7 +16,7 @@
     @endif
 @endsection
 @section("content")
-<div class="container" style="background:white;margin-bottom:50px">
+<div class="container margin-top-10" style="background:white">
     <div class="col-md-12 margin-top-30">
     	<article>
     		<header><a href="/home"><- Back to Home</a></header>
@@ -83,7 +83,6 @@
 		<p><span class="n1">*some is not party to any agreement or transaction between members, nor is some liable in respect of any matter arising which relates to a booking between members.</span></p>
 		<p><span class="n1">*some is nor the site provides any transport services.</span></p>
 		<p><span class="n1">*company will not be liable to any member in the event that any information provided by another member is false, incomplete, insurance, misleading or fraudulent.</span></p>
-        <p><span class="b1">(B) Refund & Cancellation policy</span></p>
 		</article>
     </div>
     <div class="col-md-12 margin-top-30">

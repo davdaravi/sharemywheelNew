@@ -40,7 +40,7 @@
 @endsection
 @section("content")
 <!-- main Content -->
-<div class="container">
+<div class="container margin-top-10">
     <div class="col-md-12">
         <div class="sharingRideSearch">
             <form role="form">
@@ -59,7 +59,7 @@
                         <input type="text" name="to" id="to" class="form-control" value="@if(isset($ride['to'])){{$ride['to']}}@elseif(isset($_COOKIE['tooriginal'])){{$_COOKIE['tooriginal']}}@else{{""}}@endif" placeholder="To" /> 
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 margin-top-10">
+                <div class="col-lg-2 col-md-2 col-sm-2 margin-top-10 text-center">
                     <input type="button" class="btn btn-primary" name="submitBtn" id="submitBtn" value="Search"/>
                 </div>
                 <input type="hidden" name="fromvalue" id="fromvalue" value="@if(isset($ride['from'])){{$ride['from']}}@elseif(isset($_COOKIE['fromoriginal'])){{$_COOKIE['fromoriginal']}}@else{{""}}@endif"/>
@@ -561,5 +561,13 @@ function getCityName(lat,lng,part)
         }
     );
 }
+/*$('body').load(function(){
+    $('#ridelist tbody tr td:first-child').addClass('profileBlock');
+    $('#ridelist tbody tr td:nth-child(1)').addClass('profileBlock');
+});
+*/
+$( window ).load(function() {
+  $('#ridelist tbody tr td:first-child').addClass('profileBlock');
+});
 </script>
 @endsection

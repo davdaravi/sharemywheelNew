@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default afterLogin">
     <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
-	<div class="container-fluid">
-        <div class="container-fluid xs-PLR0">
+	<div class="container">
+        <div class="xs-PLR0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -17,8 +17,10 @@
                 		<p class="logoContent">ShareMyWheel</p>
                 	</div>
                 </a>
-                <a href="{{url('/findride')}}" class="btn btn-info btn-sm margin-top-5">Find a ride</a>&nbsp;<label style="color:black">or&nbsp;</label> 
-                <a href="{{url('/offerride')}}" class="btn btn-success btn-sm margin-top-5">Offer a ride</a>
+                <lable class="rideBtns">
+                    <a href="{{url('/findride')}}" class="btn btn-info headerBtn margin-top-5">Find a ride</a>
+                    <a href="{{url('/offerride')}}" class="btn btn-success headerBtn margin-top-5">Offer a ride</a>
+                </lable>
             </div>
 
             <div id="navbar" class="navbar-collapse collapse">
@@ -31,7 +33,7 @@
                             <span><b>Rs. <span id="walletamount">25.00</span></b></span>
                         </div>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown profileMenu">
                         <a href="#" class="dropdown-toggle" style="padding-top: 0px;padding-bottom: 0px;line-height: 49px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <img id="loginuserpic" src="@if(session('profilePic')=='default.png'){{asset('/images/default.png')}}@else{{asset('/images/profile/'.session('userId').'/'.session('profilePic'))}}@endif" style="padding: 4px;margin-right: 10px;border-radius: 8px;width: 35px;height: 35px;">@if(session('userName')){{ session('userName') }}@else{{""}}@endif<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('/dashboard')}}">Dashboard</a></li>

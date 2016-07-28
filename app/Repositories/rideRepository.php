@@ -652,7 +652,7 @@ class rideRepository
                     
                     $newrideData = array();
                     $message='<a href="ridedetail/'.$value->sourcename.'_'.$value->destinationname.'_'.$value->rideId.'" target="_blank">';
-                    $message.='<div style="overflow:hidden"><div class="col-md-4 margin-top-5">';
+                    $message.='<div style="overflow:hidden"><div class="col-md-4 no-padding margin-top-5">';
                     if($value->profile_pic=='default.png')
                     {
                         $path="/images/default.png";
@@ -662,10 +662,10 @@ class rideRepository
                         $path="/images/profile/".$value->userId."/".$value->profile_pic;
                     }
                     
-                    $message.='<img src="'.$lpath.$path.'" style="width:80px;height:80px;border-radius:46%">';
+                    $message.='<img src="'.$lpath.$path.'" style="width:70px;height:70px;border-radius:46%">';
                     
                     $message.='</div>';
-                    $message.='<div class="col-md-8 margin-top-5">';
+                    $message.='<div class="col-md-8 no-padding rideListName margin-top-5">';
                     $message.='<h3>'.ucwords($value->first_name." ".$value->last_name).'</h3>';
                     if($value->birthdate==""){
                         $message.='<h6>-</h6>';    

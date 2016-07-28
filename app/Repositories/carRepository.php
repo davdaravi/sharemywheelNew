@@ -478,20 +478,20 @@ class carRepository
                         $pt='/images/cars/'.session('userId').'/'.$value->vehical_pic;
                     }
                     $newrideData = array();
-                    $message='<div class="col-md-3">';
+                    $message='<div class="col-md-3 col-sm-4 col-xs-5">';
                     $message.='<img src="'.$lpath.$pt.'" width="80" height="80">';
                     $message.='</div>';
 
-                    $message.='<div class="col-md-6">';
+                    $message.='<div class="col-md-6 col-sm-5 col-xs-5">';
                     $message.='<div>'.strtoupper($value->car_make." ".$value->car_model).'</div>';
                     $message.='<div>'.$value->no_of_seats.' Seats</div>';
                     $message.='</div>';
 
-                    $message.='<div class="col-md-2">';
-                    $message.='<div class="col-sm-6">';
+                    $message.='<div class="col-md-2 col-sm-3 col-xs-2">';
+                    $message.='<div class="col-sm-6 col-xs-6">';
                     $message.='<i class="zmdi zmdi-edit zmdi-hc-lg fa-green editCar" id="edit_'.$value->id.'" data-toggle="modal" data-target="#editCar"></i>';
                     $message.='</div>';
-                    $message.='<div class="col-sm-6">';
+                    $message.='<div class="col-sm-6 col-xs-6">';
                     $message.='<i class="zmdi zmdi-delete zmdi-hc-lg fa-red car_delete" id="delete_'.$value->id.'"></i>';
                     $message.='</div>';
                     $message.='</div>';

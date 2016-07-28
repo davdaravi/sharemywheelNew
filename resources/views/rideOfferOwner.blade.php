@@ -39,7 +39,7 @@
 @endsection
 @section("content")
 <!-- filter and Body -->
-<div class="container sharingContentBody">
+<div class="container sharingContentBody margin-top-10">
     <div class="col-md-12">
         @if(count($rideDetail)>0)
         <div class="col-md-8 sharingRideGrid">
@@ -50,7 +50,7 @@
                 </h4><hr/>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 ">
                 <div class="col-md-12 detailBlock">
                     <table class="table table-hover table-bordered margin-top-10">
                         <tbody>
@@ -247,9 +247,13 @@
                     <div class="clearfix"></div>
                     @endfor
                     @endif
-
+                    <div class="col-md-12 no-padding">
+                        <h4>Owner Details</h4>
+                    </div>
+                    <div class="clearfix"></div>
                     <div class="cabOwnerNotes">
-                        <div class="col-md-1" style="margin-top:7px;">
+
+                        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 ownerDetailProfile" style="margin-top:7px;">
                             <?php
                             if($rideDetail[0]->profile_pic=='default.png')
                             {
@@ -262,7 +266,7 @@
                             ?>
                             <img src="{{asset($npath)}}" width="50" style="border-radius:50%" height="50">
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8 ownerDetailName">
                             <h4>{{ucwords($rideDetail[0]->first_name." ".$rideDetail[0]->last_name)}}</h4>
                             <h5>{{$rideDetail[0]->comment}}</h5>
                         </div>
@@ -278,12 +282,12 @@
             <div class="clearfix"></div><hr/>
 
             <div class="col-md-12 margin-top-10">
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6">
                     <h2>{{(int)$rideDetail[0]->cost_per_seat}} Rs.</h2>
                     <h6>per co-traveller</h6>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6">
                     <h2>{{$rideDetail[0]->available_seat}} L</h2>
                     <h6>Seat Left</h6>
                 </div>
@@ -296,7 +300,7 @@
             <div class="clearfix"></div><hr/>
 
             <div class="col-md-12 margin-top-10">
-                <div class="col-md-4" style="margin:0px;padding:0px">
+                <div class="carOwnerImage">
                     <?php
                         if($rideDetail[0]->profile_pic=='default.png')
                         {
@@ -309,7 +313,7 @@
                     ?>
                     <img src="{{asset($path)}}" height="80" width="80" style="border-radius:50%;padding:0px;margin:0px;float:left">
                 </div>
-                <div class="col-md-8">
+                <div class="carOwnerDetails">
                     <label style="font-size:14px;font-weight:bold"><a href="{{route('get.profile',[$rideDetail[0]->userId,$rideDetail[0]->rideId])}}">{{ucwords($rideDetail[0]->first_name." ".$rideDetail[0]->last_name)}}</a></label><br/>
                     <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate==""){{"-"}}@else{{(date("Y")-$rideDetail[0]->birthdate)." Years old"}}@endif</label><br/>
                     <div class="stars1" style="padding:0px;margin:0px">
@@ -376,7 +380,7 @@
                     <h4>Car</h4>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-4" style="margin:0px;padding:0px">
+                <div class="carImage">
                     <?php
                     if($rideDetail[0]->vehical_pic=='car_default.png')
                     {
@@ -389,7 +393,7 @@
                     ?>
                     <img src="{{asset($ff)}}" height="80" width="80" style="padding:0px;margin:0px;float:left">
                 </div>
-                <div class="col-md-8" style="margin:0px;padding:0px">
+                <div class="carDetails">
                     <div class="col-md-12">{{$rideDetail[0]->car_make." ".$rideDetail[0]->car_model}}</div>
                     <div class="col-md-12">Color : <span>{{$rideDetail[0]->color}}</span></div>
                     <div class="col-md-12">Comfort : <span>{{$rideDetail[0]->comfort}}</span></div>

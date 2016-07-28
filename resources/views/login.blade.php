@@ -155,6 +155,48 @@
 
         var autocomplete,autocomplete1;
         $(document).ready(function(){
+            if($(window).width() < 330){
+                $('.slider2').bxSlider({
+                    slideWidth:315,
+                    minSlides: 1,
+                    maxSlides:10,
+                    slideMargin: 10
+                });
+            }
+            else if($(window).width() < 480){
+                $('.slider2').bxSlider({
+                    slideWidth:400,
+                    minSlides: 2,
+                    maxSlides:10,
+                    slideMargin: 10
+                });
+            }
+            else if ($(window).width() < 600) { 
+                $('.slider2').bxSlider({
+                    slideWidth:170,
+                    minSlides: 2,
+                    maxSlides:10,
+                    slideMargin: 10
+                });
+            }
+            else if ($(window).width() < 767) { 
+                $('.slider2').bxSlider({
+                    slideWidth:200,
+                    minSlides: 2,
+                    maxSlides:10,
+                    slideMargin: 10
+                });
+            }
+            else{
+                $('.slider2').bxSlider({
+                    slideWidth: 220,
+                    minSlides: 5,
+                    maxSlides:5,
+                    slideMargin: 10,
+                    auto: true,
+                    autoControls: true
+                  });
+            }
          //   initialize();
             $('#rideFindDatepicker').datetimepicker({
                 lang:'ch',
@@ -179,15 +221,6 @@
                     forgot_password();   
                 }
             });
-
-            $('.slider2').bxSlider({
-                slideWidth: 220,
-                minSlides: 5,
-                maxSlides:5,
-                slideMargin: 10,
-                auto: true,
-                autoControls: true
-              });
 
             $("#submit").click(function(){
                 $(".loginerror").each(function(){

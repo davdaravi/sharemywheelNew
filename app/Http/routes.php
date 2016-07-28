@@ -96,6 +96,14 @@ Route::group(['middleware' => ['web']], function () {
         'as'    =>  'get.coupan',
         'uses'  =>  'userController@coupanCode'
     ]);
+
+    Route::get('/refund',function(){
+        return view('returnCancellation');
+    });
+
+    Route::get('/pricing',function(){
+        return view('pricing');
+    });
 });
 
 Route::group(['middleware'=>['web','login','token']],function(){

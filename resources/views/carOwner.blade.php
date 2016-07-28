@@ -13,10 +13,11 @@
     label.star,label.star1 {
         float: right;
         padding: 0px 2px;
-        font-size: 15px;
+        font-size: 26px;
         color: #444;
         transition: all .2s;
         margin: 0px;
+        margin-top: -11px !important;
     }
     input.star:checked ~ label.star:before,input.star1:checked ~ label.star1:before {
         content: '\f005';
@@ -40,7 +41,7 @@
 @endsection
 @section("content")
  <!-- filter and Body -->
-<div class="container sharingContentBody">
+<div class="container sharingContentBody margin-top-10">
     <div class="col-md-12">
         <div class="col-md-8 sharingRideGrid">
             <!-- <div class="col-md-12 margin-top-15">
