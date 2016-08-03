@@ -5,6 +5,7 @@
 		@include("includes.header")
 	</head>
 	<body>
+		<div class="main">
 		<div class="se-pre-con"></div>
 		{{--for sidebar--}}
 		@section('sidebar')
@@ -17,5 +18,6 @@
 		@yield('js')
 		
 		@include("includes.footer")
+		</div>
 	</body>
 </html>

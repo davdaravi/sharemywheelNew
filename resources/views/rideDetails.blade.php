@@ -13,7 +13,7 @@
     label.star,label.star1 {
         float: right;
         padding: 0px 2px;
-        font-size: 15px;
+        font-size: 26px;
         color: #444;
         transition: all .2s;
         margin: 0px;
@@ -40,7 +40,7 @@
 @endsection
 @section("content")
 <!-- filter and Body -->
-<div class="container sharingContentBody">
+<div class="container sharingContentBody margin-top-10">
     <div class="col-md-12">
         @if(count($rideDetail)>0)
         <div class="col-md-8 sharingRideGrid">
@@ -52,7 +52,7 @@
             </div>
 
             <div class="col-md-12">
-                <div class="col-md-12 detailBlock">
+                <div class="col-md-12 detailBlock no-padding">
                     <table class="table table-hover table-bordered margin-top-10">
                         <tbody>
                             <tr>
@@ -93,7 +93,26 @@
                                 <th>Departure date</th>
                                 <td><i class="zmdi zmdi-calendar-note"></i> <?php echo date("l d F Y - H:i",strtotime($rideDetail[0]->departure_date))?></td>
                             </tr>
-
+                            <?php
+                            if($rideDetail[0]->is_round_trip==1 && $rideDetail[0]->isDaily==0 && $rideDetail[0]->return_date>'1971-01-01') 
+                            {?>
+                            <tr>
+                                <th>Return date</th>
+                                <td><i class="zmdi zmdi-calendar-note"></i> 
+                                <?php     
+                                    echo date("l d F Y - H:i",strtotime($rideDetail[0]->return_date));    
+                                ?>
+                                </td>
+                            </tr>
+                            <?php
+                            }
+                            ?>   
+                            @if($rideDetail[0]->is_round_trip==1 && $rideDetail[0]->isDaily==1)
+                            <tr>
+                                <th>Return Time</th>
+                                <td><i class="zmdi zmdi-calendar-note"></i> <?php echo date("H:i:s",strtotime($rideDetail[0]->return_time))?></td>
+                            </tr>
+                            @endif
                             <tr>
                                 <th>Details</th>
                                 <td>
@@ -130,7 +149,7 @@
                     </table>
 
                     <div class="cabOwnerNotes">
-                        <div class="col-md-1" style="margin-top:7px;">
+                        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 ownerDetailProfile" style="margin-top:7px;">
                             <?php
                                 if($rideDetail[0]->profile_pic=='default.png')
                                 {
@@ -143,7 +162,7 @@
                             ?>
                             <img src="{{asset($path)}}" width="50" style="border-radius:50%" height="50">
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8 ownerDetailName">
                             <h4>{{ucwords($rideDetail[0]->first_name." ".$rideDetail[0]->last_name)}}</h4>
                             <h5>{{$rideDetail[0]->comment}}</h5>
                         </div>
@@ -159,12 +178,12 @@
             <div class="clearfix"></div><hr/>
 
             <div class="col-md-12 margin-top-10">
-                <div class="col-md-6">
+                <div class="co-traveller">
                     <h2>{{(int)$rideDetail[0]->cost_per_seat}} Rs.</h2>
                     <h6>per co-traveller</h6>
                 </div>
 
-                <div class="col-md-6">
+                <div class="seatLeft">
                     <h2>{{$rideDetail[0]->available_seat}} L</h2>
                     <h6>Seat Left</h6>
                 </div>
@@ -254,7 +273,7 @@
             <div class="clearfix"></div><hr/>
 
             <div class="col-md-12 margin-top-10">
-                <div class="col-md-4" style="margin:0px;padding:0px">
+                <div class="carOwnerImage">
                     <?php
                         if($rideDetail[0]->profile_pic=='default.png')
                         {
@@ -267,9 +286,9 @@
                     ?>
                     <img src="{{asset($path)}}" height="80" width="80" style="border-radius:50%;padding:0px;margin:0px;float:left">
                 </div>
-                <div class="col-md-8">
+                <div class="carOwnerDetails">
                     <label style="font-size:14px;font-weight:bold"><a href="{{route('get.profile',[$rideDetail[0]->userId,$rideDetail[0]->rideId])}}">{{ucwords($rideDetail[0]->first_name." ".$rideDetail[0]->last_name)}}</a></label><br/>
-                    <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate=="")@else{{date_diff(date_create($rideDetail[0]->birthdate), date_create('today'))->y." Years old"}}@endif</label><br/>
+                    <label style="font-size:12px;font-weight:normal">@if($rideDetail[0]->birthdate==""){{"-"}}@else{{(date("Y")-$rideDetail[0]->birthdate)." Years old"}}@endif</label><br/>
                     <div class="stars1" style="padding:0px;margin:0px">
                         @if($rideDetail[0]->rating==5)
                         <input type="radio" class="star1 star-5" name="rating" value="5" checked="checked"/><label class="star1 star-5"></label>                        
@@ -334,7 +353,7 @@
                     <h4>Car</h4>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-4" style="margin:0px;padding:0px">
+                <div class="carImage">
                     <?php
                     if($rideDetail[0]->vehical_pic=='car_default.png')
                     {
@@ -347,7 +366,7 @@
                     ?>
                     <img src="{{asset($ff)}}" height="80" width="80" style="padding:0px;margin:0px;float:left">
                 </div>
-                <div class="col-md-8" style="margin:0px;padding:0px">
+                <div class="carDetails">
                     <div class="col-md-12">{{$rideDetail[0]->car_make." ".$rideDetail[0]->car_model}}</div>
                     <div class="col-md-12">Color : <span>{{$rideDetail[0]->color}}</span></div>
                     <div class="col-md-12">Comfort : <span>{{$rideDetail[0]->comfort}}</span></div>
@@ -471,6 +490,7 @@ $(document).ready(function(){
         var dd=$("#pay_wallet").is(':checked');
         if(dd==false)
         {
+            $("#paybtn").prop("disabled",true);
             e.preventDefault(); 
             $.ajax({
                 async:false,
@@ -506,6 +526,7 @@ $(document).ready(function(){
         else
         {
             e.preventDefault(); 
+            $("#paybtn").prop("disabled",true);
             //wallet
             $.ajax({
                 async:false,
@@ -515,7 +536,7 @@ $(document).ready(function(){
                 data:{"ride":{{$rideDetail[0]->rideId}},"cost_seat":{{$rideDetail[0]->cost_per_seat}},"No_seats":$("#seats").val()},
                 dataType:'json',
                 beforeSend:function(){
-                    
+                    $('.main').append('<div class="overlay"><div class="overlayImage"></div></div>');
                 },
                 success:function(response){
                    window.location.reload();
@@ -527,6 +548,7 @@ $(document).ready(function(){
                 },
                 complete:function(){
                     //removeOverlay();
+                    $('.overlay').remove();
                 }
             });
         }

@@ -210,7 +210,7 @@ class ratingRepository
                     
                     
                     $newrideData = array();
-                    $message='<div class="col-md-3 text-center">';
+                    $message='<div class="col-md-3 col-sm-3 text-center">';
                     if($value->profile_pic!='default.png')
                     {
                         $path="/images/profile/".$value->userId."/".$value->profile_pic;
@@ -220,10 +220,10 @@ class ratingRepository
                         $path="/images/default.png";
                     }
                     $message.='<img src="'.$lpath.$path.'" height="80px" width="80px" style="border-radius:5px"/>';
-                    $message.='</div><div class="col-md-6">';
+                    $message.='</div><div class="col-md-6 col-sm-5 xs-text-center">';
                     $message.='<div><h5>'.ucwords($value->name).'</h5></div>';
                     $message.='<div></div></div>';
-                    $message.='<div class="col-md-3 text-right">';
+                    $message.='<div class="col-md-3 text-right xs-text-center PLR0 col-sm-4">';
                     $message.='<div>';
                     $message.='<i class="zmdi zmdi-calendar-alt zmdi-hc-lg"></i> <span>'.date("d-F-Y",strtotime($value->system_datetime)).'</span>';
                     $message.='</div>';
@@ -360,7 +360,7 @@ class ratingRepository
                     
                     
                     $newrideData = array();
-                    $message='<div class="col-md-3 text-center">';
+                    $message='<div class="col-md-3 col-sm-3 col-sm-6 text-center">';
                     if($value->profile_pic=="default.png")
                     {
                         $path="/images/default.png";
@@ -370,10 +370,10 @@ class ratingRepository
                         $path="/images/profile/".$value->userId."/".$value->profile_pic;
                     }
                     $message.='<img src="'.$lpath.$path.'" height="80px" width="80px" style="border-radius:5px"/>';
-                    $message.='</div><div class="col-md-6">';
+                    $message.='</div><div class="col-md-6 col-sm-5 xs-text-center">';
                     $message.='<div><h5>'.ucwords($value->name).'</h5></div>';
                     $message.='<div></div></div>';
-                    $message.='<div class="col-md-3 text-right">';
+                    $message.='<div class="col-md-3 text-right xs-text-center PLR0 col-sm-4">';
                     $message.='<div>';
                     $message.='<i class="zmdi zmdi-calendar-alt zmdi-hc-lg"></i> <span>'.date("d-F-Y",strtotime($value->system_datetime)).'</span>';
                     $message.='</div>';

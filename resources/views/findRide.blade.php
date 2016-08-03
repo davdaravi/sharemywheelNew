@@ -8,7 +8,7 @@
 @endsection
 @section("content")
 
-<div class="container">
+<div class="container margin-top-10">
             <div class="col-md-12">
                 <div class="sharingRideSearch">
                     <form role="form" method="POST" action="{{route('post.ride.search')}}" onsubmit="return checkRide()">
@@ -16,7 +16,7 @@
                             <h4>Find a ride</h4>
                         </div>
                         
-                        <div class="form-group col-lg-3 col-md-4 col-sm-5">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-pin zmdi-hc-lg zmdi-green"></i></span>
                                 <input type="text" id="from" name="from" class="form-control" placeholder="From" value=""/>   
@@ -26,14 +26,14 @@
                         <!--<div class="col-lg-1 text-center">
                             <button type="button" class="btn" id="reverse" name="reverse"><i class="zmdi zmdi-repeat zmdi-hc-lg"></i></button>
                         </div>-->
-                        <div class="form-group col-lg-3 col-md-4 col-sm-5">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-pin zmdi-hc-lg zmdi-red"></i></span>
                                 <input type="text" name="to" id="to" class="form-control" placeholder="To" value=""/> 
                             </div>
                             @if ($errors->has('tocity'))<label id="toerror" class="validation_error"><b>{{ $errors->first('tocity') }}</b></label>@endif                
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-2">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="zmdi zmdi-calendar-note zmdi-hc-lg"></i></span>
                                 <input type="text" name="fromdate" id="fromdate" class="form-control" placeholder="select Date" value="" autocomplete="off"/>

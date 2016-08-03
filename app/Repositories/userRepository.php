@@ -473,19 +473,19 @@ class userRepository
         try
         {
             $request=$this->request->all();
-           
+
             if(session('userId'))
             {
                 if(count($request)>0)
                 {
+                    
                     //image is there
                     $message=[
                         'pics_0.required'   =>  'Image is required',
-                        'pics_0.image'      =>  'File Should be an image',
                         'Pics_0.max'        =>  'Filesize can not be more than 2 MB'
                     ];
                     $validator=Validator::make($request,[
-                        'pics_0'    =>  'required|image|max:2048'
+                        'pics_0'    =>  'required|min:1|max:2048'
                     ],$message);
                     if($validator->fails())
                     {
@@ -500,30 +500,39 @@ class userRepository
                     else
                     {
                         $UserPhoto=$request['pics_0'];
+                        $mime_type=$UserPhoto->getClientMimeType();
+                        $mime_array=array('image/gif','image/jpeg','image/png','image/bmp','application/octet-stream','image/bmp');
+                        if(in_array($mime_type, $mime_array))
+                        {
+                            $content_type=$UserPhoto->getClientOriginalExtension();
+                            $nameImage=$UserPhoto->getClientOriginalName();
 
-                        
-                        $content_type=$UserPhoto->getClientOriginalExtension();
-                        $nameImage=$UserPhoto->getClientOriginalName();
+                            //   dd($content_type);
+                            // Get image type
+                            $userImage = 'profile'.rand(100,999).time().".".$content_type;
 
-                        //   dd($content_type);
-                        // Get image type
-                        $userImage = 'profile'.rand(100,999).time().".".$content_type;
+                            //Get the file
 
-                        //Get the file
-
-                        if( is_dir("public/images/profile/".session('userId')) == false ){ 
-                        $path = public_path().'/images/profile/'.session('userId') .'/';
-                        HelperController::makeDirectory($path, $mode = 0777, true, true);
-                        //@chmod("public/images/users/".$userDetails['id'], 0755);
-                        }     
-                        $destinationPath=  public_path()."/images/profile/".session('userId').'/';
-                        //Store in the filesystem.
-                        $pathn=$userImage;
-                        $data=$UserPhoto->move($destinationPath, $userImage);  
-                        DB::table('users')->where('id',session('userId'))->update(['profile_pic'=>$pathn]);
-                        $this->request->session()->put('profilePic',$pathn);
-                        $errors=array();
-                        return Response::json(array('status'=>true,'error'=>$errors,'message'=>'Image Uploaded successfully','class'=>'success','path'=>$pathn,'userid'=>session('userId')),200);
+                            if( is_dir("public/images/profile/".session('userId')) == false ){ 
+                            $path = public_path().'/images/profile/'.session('userId') .'/';
+                            HelperController::makeDirectory($path, $mode = 0777, true, true);
+                            //@chmod("public/images/users/".$userDetails['id'], 0755);
+                            }     
+                            $destinationPath=  public_path()."/images/profile/".session('userId').'/';
+                            //Store in the filesystem.
+                            $pathn=$userImage;
+                            $data=$UserPhoto->move($destinationPath, $userImage);  
+                            DB::table('users')->where('id',session('userId'))->update(['profile_pic'=>$pathn]);
+                            $this->request->session()->put('profilePic',$pathn);
+                            $errors=array();
+                            return Response::json(array('status'=>true,'error'=>$errors,'message'=>'Image Uploaded successfully','class'=>'success','path'=>$pathn,'userid'=>session('userId')),200);
+                        }
+                        else
+                        {
+                            $errors=array();
+                            $errors[0]="File type is not valid";
+                            return Response::json(array('status'=>false,'error'=>$errors,'message'=>'','class'=>'danger'),200);
+                        }
                     }
                 }
                 else
@@ -560,7 +569,6 @@ class userRepository
                     //image is there
                     $message=[
                         'pics_0.required'   =>  'Image is required',
-                        'pics_0.image'      =>  'File Should be an image',
                         'Pics_0.max'        =>  'Filesize can not be more than 2 MB'
                     ];
                     $validator=Validator::make($request,[
@@ -579,30 +587,40 @@ class userRepository
                     else
                     {
                         $UserPhoto=$request['pics_0'];
-
+                        $mime_type=$UserPhoto->getClientMimeType();
+                        $mime_array=array('image/gif','image/jpeg','image/png','image/bmp','application/octet-stream','image/bmp');
+                        if(in_array($mime_type, $mime_array))
+                        {
                         
-                        $content_type=$UserPhoto->getClientOriginalExtension();
-                        $nameImage=$UserPhoto->getClientOriginalName();
+                            $content_type=$UserPhoto->getClientOriginalExtension();
+                            $nameImage=$UserPhoto->getClientOriginalName();
 
-                        //   dd($content_type);
-                        // Get image type
-                        $userImage = 'profile'.rand(100,999).time().".".$content_type;
+                            //   dd($content_type);
+                            // Get image type
+                            $userImage = 'profile'.rand(100,999).time().".".$content_type;
 
-                        //Get the file
+                            //Get the file
 
-                        if( is_dir("public/images/licence/".session('userId')) == false ){ 
-                        $path = public_path().'/images/licence/'.session('userId') .'/';
-                        HelperController::makeDirectory($path, $mode = 0777, true, true);
-                        //@chmod("public/images/users/".$userDetails['id'], 0755);
-                        }     
-                        $destinationPath=  public_path()."/images/licence/".session('userId').'/';
-                        //Store in the filesystem.
-                        $pathn=$userImage;
-                        $data=$UserPhoto->move($destinationPath, $userImage);  
-                        DB::table('users')->where('id',session('userId'))->update(['licence_pic'=>$pathn]);
-                        //$this->request->session()->put('profilePic',$pathn);
-                        $errors=array();
-                        return Response::json(array('status'=>true,'error'=>$errors,'message'=>'Image Uploaded successfully','class'=>'success','path'=>$pathn,'userid'=>session('userId')),200);
+                            if( is_dir("public/images/licence/".session('userId')) == false ){ 
+                            $path = public_path().'/images/licence/'.session('userId') .'/';
+                            HelperController::makeDirectory($path, $mode = 0777, true, true);
+                            //@chmod("public/images/users/".$userDetails['id'], 0755);
+                            }     
+                            $destinationPath=  public_path()."/images/licence/".session('userId').'/';
+                            //Store in the filesystem.
+                            $pathn=$userImage;
+                            $data=$UserPhoto->move($destinationPath, $userImage);  
+                            DB::table('users')->where('id',session('userId'))->update(['licence_pic'=>$pathn]);
+                            //$this->request->session()->put('profilePic',$pathn);
+                            $errors=array();
+                            return Response::json(array('status'=>true,'error'=>$errors,'message'=>'Image Uploaded successfully','class'=>'success','path'=>$pathn,'userid'=>session('userId')),200);
+                        }
+                        else
+                        {
+                            $errors=array();
+                            $errors[0]="File type is not valid";
+                            return Response::json(array('status'=>false,'error'=>$errors,'message'=>'','class'=>'danger'),200);
+                        }
                     }
                 }
                 else

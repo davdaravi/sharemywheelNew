@@ -16,7 +16,7 @@
     @endif
 @endsection
 @section("content")
-<div class="container" style="background:white;margin-bottom:50px">
+<div class="container margin-top-10" style="background:white">
     <div class="col-md-12 margin-top-30">
     	<article>
     		<header><a href="/home"><- Back to Home</a></header>

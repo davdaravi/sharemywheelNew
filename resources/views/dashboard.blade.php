@@ -110,7 +110,10 @@
 
                 <div class="col-md-6 text-right">
                     <div>
-                        <span>{{$rideOffered[$i]->available_seat}}</span> <small>seats left</small>
+                        <small>Offered seats - </small><span>{{$rideOffered[$i]->offer_seat}}</span> 
+                    </div>
+                    <div class="margin-top-10">
+                        <small>Left seats - </small><span>{{$rideOffered[$i]->available_seat}}</span>
                     </div>
                     <div class="margin-top-10">
                         <h3>{{(int)$rideOffered[$i]->cost_per_seat}} &#8377; <small>Per co-traveller</small></h3>
@@ -320,7 +323,7 @@
                 <li class="earnTransaction"><a href="#earnTransaction" data-toggle="tab">Earn Transaction</a>
                 </li>
             </ul>
-            <div class="tab-content col-md-8 col-sm-8 col-xs-12">
+            <div class="tab-content col-md-8 col-sm-8 col-xs-12 no-padding">
                 <div class="tab-pane active" id="paidTransaction" style="padding-top:0px">
                     <table id="paidTransactionTable" class="table table-bordered table-hover" style="width:100%;">
                         <thead>
@@ -360,8 +363,8 @@
                 <li class="active ridebooked"><a href="#ridebooked" data-toggle="tab">Ride Booked</a>
                 </li>
             </ul>
-            <div class="tab-content col-md-8 col-sm-8 col-xs-12">
-                <div class="tab-pane active" id="bookingHistory" style="padding-top:0px">
+            <div class="tab-content col-md-8 col-sm-8 col-xs-12 no-padding">
+                <div class="tab-pane" id="bookingHistory" style="padding-top:0px">
                     <table id="bookingHistoryTable" class="table table-bordered table-hover" style="width:100%;">
                         <thead>
                             <tr>
@@ -374,7 +377,7 @@
                     </table>
                     
                 </div>
-                <div class="tab-pane" id="ridebooked" style="padding-top:0px">
+                <div class="tab-pane active" id="ridebooked" style="padding-top:0px">
                     <table id="ridebookedTable" class="table table-bordered table-hover" style="width:100%;">
                         <thead>
                             <tr>
@@ -402,9 +405,9 @@
                     <li class="ratingsGiven"><a href="#ratingsGiven" data-toggle="tab">Ratings Given</a>
                     </li>
                 </ul>
-                <div class="tab-content col-md-8">
+                <div class="tab-content col-md-9 col-sm-9 col-xs-12 no-padding">
                     <div class="tab-pane active" id="exchangeRatings">
-                        <div class="col-md-12">
+                        <div class="col-md-12 no-padding">
                             <h4>Exchange ratings with another member</h4>
                             <h5>Select a member you travelled with by selecting their name </h5>
                         </div>
@@ -441,7 +444,8 @@
                             <table id="ratingReceivedTable" class="table table-bordered table-hover" style="width:100%;">
                                     <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>few</th>
+                                           
                                         </tr>
                                     </thead>
 
@@ -472,7 +476,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="tab-pane fade" id="profile">
-            <div class="col-md-12">
+            <div class="col-md-12 no-padding">
                 <!-- tabs left -->
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
@@ -485,7 +489,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="personalInfo">
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-sm-9 col-xs-12 no-padding">
                                 <h3>Personal Information</h3>
                                 <hr/>
                                 <!--<form class="form-horizontal" name="userPersonalInfoForm" id="userPersonalInfoForm" role="form">-->
@@ -493,10 +497,10 @@
                                     <form action="" method="POST" name="imagesubmitform" id="imagesubmitform" enctype="multipart/form-data">
                                     <div class="form-group margin-top-10">
                                         <label class="control-label col-xs-12 col-md-12 margin-top-10">Profile pic:</label>
-                                        <div class="col-xs-2 col-md-2">
+                                        <div class="col-xs-4 col-sm-3 col-md-3">
                                             <img id="userimage" src="/images/default.png" width="100px" height="100px">
                                         </div>
-                                        <div class="col-xs-5 col-md-5" style="margin-top:40px">
+                                        <div class="col-xs-8 col-sm-7 col-md-7" style="margin-top:40px">
                                             <input type="file" name="profile_pic" id="profile_pic" accept="image/gif, image/jpeg, image/png, image/gif"/>
                                         </div>
                                         <div class="col-xs-2 col-md-2" style="margin-top:40px">
@@ -508,10 +512,10 @@
                                     <form action="" method="POST" name="licencesubmitform" id="licencesubmitform" enctype="multipart/form-data">
                                     <div class="form-group margin-top-10">
                                         <label class="control-label col-xs-12 col-md-12 margin-top-10">Licence pic:</label>
-                                        <div class="col-xs-2 col-md-2">
+                                        <div class="col-xs-4 col-sm-3 col-md-3">
                                             <img id="licenceimage" src="/images/no_licence.png" width="100px" height="100px">
                                         </div>
-                                        <div class="col-xs-5 col-md-5" style="margin-top:40px">
+                                        <div class="col-xs-8 col-sm-7 col-md-7" style="margin-top:40px">
                                             <input type="file" name="licence_pic" id="licence_pic" accept="image/gif, image/jpeg, image/png, image/gif"/>
                                         </div>
                                         <div class="col-xs-2 col-md-2" style="margin-top:40px">
@@ -520,48 +524,45 @@
                                     </div>
                                     </form>
                                     <div class="clearfix"></div>
-                                    <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Username :</label>
-                                        <div class="col-xs-5 col-md-5">
-                                            <input type="text" class="form-control" maxlength="35" name="username" id="username" placeholder="Enter Username"/>
-                                        </div>
+
+                                    <div class="col-md-6 col-sm-6 margin-top-10">
+                                        <label class="control-label margin-top-10">Username :</label>
+                                        <input type="text" class="form-control" maxlength="35" name="username" id="username" placeholder="Enter Username"/>
                                         <label id="userNameError" style="vertical-align:bottom" class="validation_error"></label>
                                     </div>
-                                    <div class="clearfix"></div>
-                                    <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Gender :</label>
-                                        <div class="col-xs-5 col-md-5">
-                                            <div class="btn-group" data-toggle="buttons">
+
+                                    <div class="col-md-6 col-sm-6 margin-top-10">
+                                        <label class="control-label margin-top-10">Gender :</label>
+                                            <div class="" data-toggle="buttons">
                                                 <input type="radio" name="gender" id="male" value="M"> Male
                                                 <input type="radio" name="gender" id="female" value="F"> Female
                                             </div>
-                                        </div>
                                         <label id="genderError" style="vertical-align:bottom" class="validation_error"></label>
                                     </div>
                                     <div class="clearfix"></div>
 
-                                    <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">First Name :</label>
-                                        <div class="col-xs-5 col-md-5">
-                                            <input type="text" name="firstName" id="firstName" maxlength="35" class="form-control" placeholder="Enter First Name"/>
-                                        </div>
+                                    <div class="col-md-6 col-sm-6 margin-top-10">
+                                        <label class="control-label margin-top-10">First Name :</label>
+                                        <input type="text" name="firstName" id="firstName" maxlength="35" class="form-control" placeholder="Enter First Name"/>
+                                        
                                         <label id="firstNameError" style="vertical-align:bottom" class="validation_error"></label>
                                     </div>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <div class="clearfix"></div>
+                                    
 
-                                    <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Last Name :</label>
-                                        <div class="col-xs-5 col-md-5">
-                                            <input type="text" name="lastName" id="lastName" maxlength="35" class="form-control" placeholder="Enter Last Name"/>
-                                        </div>
+                                    <div class="col-dm-6 col-sm-6 margin-top-10">
+                                        <label class="control-label margin-top-10">Last Name :</label>
+                                        <input type="text" name="lastName" id="lastName" maxlength="35" class="form-control" placeholder="Enter Last Name"/>
+                                        
                                         <label id="lastNameError" style="vertical-align:bottom" class="validation_error"></label>
                                     </div>
                                     <div class="clearfix"></div>
 
                                     <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Birth Year :</label>
-                                        <div class="col-xs-5 col-md-5">
+                                        <div class="birthYear">
+                                            <label class="control-label">Birth Year :</label>
+                                        </div>
+                                        <div class="currentYear">
                                             <select name="birth" id="birth" class="form-control">
                                                 <option value="">Select Year</option>
                                                 @for($i=1950;$i<2001;$i++)
@@ -573,22 +574,21 @@
                                     </div>
                                     <div class="clearfix"></div>
 
-                                    <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Bio :</label>
-                                        <div class="col-xs-5 col-md-5">
-                                            <textarea class="form-control" name="bio" id="bio" maxlength="250" placeholder="Enter Year Bio"></textarea>
-                                        </div>
+                                    <div class="col-md-12 margin-top-10">
+                                        <label class="control-label margin-top-10">Bio :</label>
+                                        <textarea class="form-control" name="bio" id="bio" maxlength="250" placeholder="Enter Year Bio"></textarea>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group margin-top-10">
-                                        <div class="col-xs-offset-2 col-xs-10">
+                                        <div class="col-md-12 text-right">
                                             <input type="button" name="submit" id="submit" class="btn btn-primary" value="Save Profile Info"/>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group" style="margin-top:60px">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Email :</label>
-                                        <div class="col-xs-5 col-md-5">
+                                        <label class="control-label col-md-12 margin-top-10">Email :</label>
+                                        <div class="clearfix"></div>
+                                        <div class="col-xs-12 col-md-5">
                                             <input type="email" name="email" maxlength="50" id="email" class="form-control" placeholder="Enter Email"/>
                                             <div class="margin-top-10" id="emailConfirmMsg">
                                                 
@@ -597,21 +597,22 @@
                                                 <label class="emailcode" style="color:#009688;cursor:pointer">Send Verification Code</label>
                                             </div>
                                         </div>
-                                        <div class="col-xs-3 col-md-3">
+                                        <div class="col-xs-12 col-md-3">
                                             <input type="text" name="confirmEmailCode" id="confirmEmailCode" minlength="6" maxlength="6" class="form-control" placeholder="Confirmation Code"/>
                                             <div class="margin-top-10">
                                                 Already received a confirmation code?
                                             </div>
                                         </div> 
-                                        <div class="col-xs-2 col-md-2">
+                                        <div class="col-xs-2 col-md-2 MT10">
                                             <button type="button" name="confirmemail" id="confirmemail" onclick="checkEmailConfirmation()" class="btn btn-primary">Confirm</button>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
 
                                     <div class="form-group margin-top-10">
-                                        <label class="control-label col-xs-2 col-md-2 margin-top-10">Mobile :</label>
-                                        <div class="col-xs-5 col-md-5">
+                                        <label class="control-label col-md-12 margin-top-10">Mobile :</label>
+                                        <div class="clearfix"></div>
+                                        <div class="col-xs-12 col-md-5">
                                             <input type="text" name="mobile" id="mobile" minlength="10" maxlength="10" class="form-control" placeholder="Enter Mobile"/>
                                             <div class="margin-top-10" id="mobileConfirmMsg">
                                                 
@@ -620,13 +621,13 @@
                                                 <label class="mobilecode" style="color:#009688;cursor:pointer">Send Verification Code</label>
                                             </div>
                                         </div>
-                                        <div class="col-xs-3 col-md-3">
+                                        <div class="col-xs-12 col-md-3">
                                             <input type="text" name="confirmMobileCode" id="confirmMobileCode" minlength="6" maxlength="6" class="form-control" placeholder="Confirmation Code"/>
                                             <div class="margin-top-10">
                                                 Already received a confirmation code?
                                             </div>
                                         </div> 
-                                        <div class="col-xs-2 col-md-2">
+                                        <div class="col-xs-2 col-md-2 MT10">
                                             <button type="button" id="confirmmobile" name="confirmmobile" onclick="checkMobileConfirmation()" class="btn btn-primary">Confirm</button>
                                         </div>
                                     </div>
@@ -636,13 +637,13 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="tab-pane" id="preference">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-sm-9 col-xs-12">
                                 <h3>Preference</h3>
                                 <hr/>
                                 <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-2">Chattiness :</label>
-                                        <div class="col-xs-10">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Chattiness :</label>
+                                        
                                             <select class="form-control" name="chat" id="chat">
                                                 @for($i=0;$i<count($preference_option);$i++)
                                                     <?php $flag=0;?>
@@ -659,13 +660,12 @@
                                                     @endif
                                                 @endfor
                                             </select>
-                                        </div>
                                     </div>
                                     <div class="clearfix"></div>
 
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-2">Smoking :</label>
-                                        <div class="col-xs-10">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Smoking :</label>
+                                        
                                             <select class="form-control" name="smoke" id="smoke">
                                                 @for($i=0;$i<count($preference_option);$i++)
                                                     <?php $flag=0;?>
@@ -682,13 +682,13 @@
                                                     @endif
                                                 @endfor
                                             </select>
-                                        </div>
+                                        
                                     </div>
                                     <div class="clearfix"></div>
 
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-2">Pets :</label>
-                                        <div class="col-xs-10">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Pets :</label>
+                                        
                                             <select class="form-control" name="pets" id="pets">
                                                 @for($i=0;$i<count($preference_option);$i++)
                                                     <?php $flag=0;?>
@@ -705,13 +705,12 @@
                                                     @endif
                                                 @endfor
                                             </select>
-                                        </div>
                                     </div>
                                     <div class="clearfix"></div>
 
-                                    <div class="form-group">
-                                        <label class="control-label col-xs-2">Music :</label>
-                                        <div class="col-xs-10">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Music :</label>
+                                        
                                             <select class="form-control" name="music" id="music">
                                                 @for($i=0;$i<count($preference_option);$i++)
                                                     <?php $flag=0;?>
@@ -728,12 +727,12 @@
                                                     @endif
                                                 @endfor
                                             </select>
-                                        </div>
+                                        
                                     </div>
                                     <div class="clearfix"></div>
 
                                     <div class="form-group margin-top-10">
-                                        <div class="col-xs-offset-2 col-xs-10">
+                                        <div class="col-md-12 text-right">
                                             <button type="button" name="preference_btn" id="preference_btn" class="btn btn-primary">Save Preference</button>
                                         </div>
                                     </div>
@@ -743,8 +742,8 @@
                         </div>
 
                         <div class="tab-pane" id="car">
-                            <div class="col-md-8">
-                                <div class="col-md-12">
+                            <div class="col-md-8 col-sm-9 col-xs-12 no-padding">
+                                <div class="col-md-12 no-padding margin-top-10">
                                     <button type="button" data-toggle="modal" data-target="#addCar" class="btn btn-primary addCar">Add Car</button>
                                 </div>
                                 <div class="clearfix"></div>
@@ -780,10 +779,10 @@
 
                 <div class="row amount-div">
                     <div class="col-md-12">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-8 col-xs-8">
                             <input type="text" name="ccode" id="ccode" class="form-control input-sm" placeholder="Enter coupan code"/>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
                             <input type="button" id="coupan_apply_btn" name="coupan_apply_btn" class="btn btn-primary" value="Apply"/>
                         </div>
                     </div>
@@ -909,7 +908,7 @@
                                 <option value="{{$i}}">{{$i}}</option>
                             @endfor
                         </select>
-                        <label id="carSeat" class="validation_error PD0"></label>
+                        <label id="carSeatError" class="validation_error PD0"></label>
                     </div>
                     <div class="clearfix"></div>
                     
@@ -917,7 +916,7 @@
                     <div class="col-md-6 margin-top-10">
                         <label>Car Image</label>
                         <input type="file" name="carImage" id="carImage" class="form-control" accept="image/gif, image/jpeg, image/png, image/gif" />
-                        <label id="carImage" class="validation_error PD0"></label>
+                        <label id="carImageError" class="validation_error PD0"></label>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -1144,6 +1143,7 @@
 
             $("#imagesubmitform").submit(function(e){
                 e.preventDefault();
+
                 var formData=new FormData(),
                     files    = $('#profile_pic').get(0).files;
                     $.each(files, function(i, file) {

@@ -16,7 +16,7 @@
     @endif
 @endsection
 @section("content")
-<div class="container sharingContentBody">
+<div class="container sharingContentBody margin-top-10">
     <div class="col-md-12">
         <div class="col-md-12 sharingRideGrid">
             

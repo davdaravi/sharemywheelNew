@@ -32,7 +32,7 @@ class facebookController extends Controller
     {
         try 
         {
-            if(session()->has('userId'))
+            if(\Session::has('userId'))
             {
                 return redirect('/ridelist');
             }

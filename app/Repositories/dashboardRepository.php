@@ -143,7 +143,7 @@ class dashboardRepository
                     $message.='&nbsp;<i class="zmdi zmdi-arrow-right"></i>&nbsp;'; 
                     $message.='<span>'.$value->destination.'</span>';
                     $message.='</h5></div><div class="panel-body">';
-                    $message.='<div class="col-md-6"><div>';
+                    $message.='<div class="col-md-6 col-sm-6"><div>';
                     $message.='<i class="zmdi zmdi-calendar-alt zmdi-hc-lg"></i>&nbsp;&nbsp;<span>'.date("l d F Y - h:i A",strtotime($value->departure_date)).'</span>';
                     $message.='</div><div class="margin-top-10">';
                     if($value->profile_pic=='default.png')
@@ -157,7 +157,7 @@ class dashboardRepository
                     $message.='<img src="'.$lpath.$path.'" height="50" width="50" style="border-radius:50%;border:1px solid #eee;box-shadow:0px 1px 1px 1px #ccc"/>&nbsp;&nbsp;'.ucwords($value->name);
                     $message.='</div>';
                     $message.='<div class="margin-top-10">';
-                    $message.='<div><label>Rating:</label></div>';
+                    $message.='<div><label class="control-label">Rating:</label></div>';
                     $message.='<div style="color:#999" class="stars1">';
                                                                    
                     if($value->rating==5)
@@ -201,7 +201,7 @@ class dashboardRepository
                         $message.='<input type="radio" class="star1 star1-1" id="star-a1" value="1" disabled="disabled"/><label for="star-a1" class="star1 star1-1"></label>';
                     }
                     $message.='</div></div></div>';
-                    $message.='<div class="col-md-6 text-right">';
+                    $message.='<div class="col-md-6 col-sm-6 text-right">';
                     $message.='<div>';
                     $message.='<span style="color:#777">'.$value->seats.' seats booked</span>';
                     $message.='</div>';
@@ -211,9 +211,9 @@ class dashboardRepository
                     $message.='</div>';
                     $message.='<div class="clearfix"></div>';
                     $message.='<hr/>';
-                    $message.='<div class="col-md-6">';
+                    $message.='<div class="col-md-6 col-sm-6">';
                     $message.='</div>';
-                    $message.='<div class="col-md-6 text-right">';
+                    $message.='<div class="col-md-6 col-sm-6 text-right">';
                     $message.='<span><a href="ridedetail/'.$value->departureCity.'_'.$value->arrivalCity.'_'.$value->rideId.'"><i class="zmdi zmdi-eye zmdi-hc-lg"></i> See ride Detail  </a></span> ';
                     $message.='</div>';
                     $message.='</div>';
@@ -306,7 +306,7 @@ class dashboardRepository
                     $message.='&nbsp;<i class="zmdi zmdi-arrow-right"></i>&nbsp;'; 
                     $message.='<span>'.$value->destination.'</span>';
                     $message.='</h5></div><div class="panel-body">';
-                    $message.='<div class="col-md-6"><div>';
+                    $message.='<div class="col-md-6 col-sm-6"><div>';
                     $message.='<i class="zmdi zmdi-calendar-alt zmdi-hc-lg"></i>&nbsp;&nbsp;<span>'.date("l d F Y - h:i A",strtotime($value->departure_date)).'</span>';
                     $message.='</div><div class="margin-top-10">';
 
@@ -321,7 +321,7 @@ class dashboardRepository
                     $message.='<img src="'.$lpath.$path.'" height="50" width="50" style="border-radius:50%;border:1px solid #eee;box-shadow:0px 1px 1px 1px #ccc"/>&nbsp;&nbsp;'.ucwords($value->name);
                     $message.='</div>';
                     $message.='<div class="margin-top-10">';
-                    $message.='<div><label>Rating:</label></div>';
+                    $message.='<div><label class="control-label">Rating:</label></div>';
                     $message.='<div style="color:#999" class="stars1">';
                                                         
                     
@@ -366,7 +366,7 @@ class dashboardRepository
                         $message.='<input type="radio" class="star1 star1-1" id="star-b1" value="1" disabled="disabled"/><label for="star-b1" class="star1 star1-1"></label>';
                     }
                     $message.='</div></div></div>';
-                    $message.='<div class="col-md-6 text-right">';
+                    $message.='<div class="col-md-6 col-sm-6 text-right">';
                     $message.='<div>';
                     $message.='<span style="color:#777">'.$value->seats.' seats booked</span>';
                     $message.='</div>';
@@ -376,9 +376,9 @@ class dashboardRepository
                     $message.='</div>';
                     $message.='<div class="clearfix"></div>';
                     $message.='<hr/>';
-                    $message.='<div class="col-md-6">';
+                    $message.='<div class="col-md-6 col-sm-6">';
                     $message.='</div>';
-                    $message.='<div class="col-md-6 text-right">';
+                    $message.='<div class="col-md-6 col-sm-6 text-right">';
                     $message.='<span><a href="ridedetail/'.$value->departureCity.'_'.$value->arrivalCity.'_'.$value->rideId.'"><i class="zmdi zmdi-eye zmdi-hc-lg"></i> See ride offer  </a></span> ';
                     $message.='</div>';
                     $message.='</div>';
@@ -456,7 +456,7 @@ class dashboardRepository
                 // dd($ridesData);
                 if (!empty($sSearch)) {
 
-                    $ridesData = $ridesData->whereRaw('(CONCAT(first_name," ",last_name) LIKE "%' . $sSearch . '%" or date_format(rides.departure_date,"%d-%m-%Y")  LIKE "%' . $sSearch . '%"  or rating LIKE "%' . $sSearch . '%" or rides.departureOriginal LIKE "%'.$sSearch.'%" or rides.arrivalOriginal LIKE "%'.$sSearch.'%" or rides.offer_seat LIKE "%'.$sSearch.'%" or rides.available_seat LIKE "%'.$sSearch.'%"  or rides.cost_per_seat LIKE "%'.$sSearch.'%")');
+                    $ridesData = $ridesData->whereRaw('(CONCAT(first_name," ",last_name) LIKE "%' . $sSearch . '%" or date_format(rides.departure_date,"%d-%m-%Y")  LIKE "%' . $sSearch . '%" or rides.departureOriginal LIKE "%'.$sSearch.'%" or rides.arrivalOriginal LIKE "%'.$sSearch.'%" or rides.offer_seat LIKE "%'.$sSearch.'%" or rides.available_seat LIKE "%'.$sSearch.'%"  or rides.cost_per_seat LIKE "%'.$sSearch.'%")');
                 }
 
                
@@ -481,12 +481,13 @@ class dashboardRepository
                 }
 
                 $ridesData = $ridesData->get();
+                
                 $iTotal = count($ridesData);
                 $ridesDataCount=count($ridesDataCount);
                 // Output
                 $output = array(
                     'sEcho' => intval($sEcho),
-                    'iTotalRecords' => intval($iTotal),
+                    'iTotalRecords' => intval($ridesDataCount),
                     'iTotalDisplayRecords' => intval($iTotal),
                     'aaData' => array()
                 );
@@ -500,7 +501,7 @@ class dashboardRepository
                     $message.='&nbsp;<i class="zmdi zmdi-arrow-right"></i>&nbsp;'; 
                     $message.='<span>'.$value->arrivalOriginal.'</span>';
                     $message.='</h5></div><div class="panel-body">';
-                    $message.='<div class="col-md-6"><div>';
+                    $message.='<div class="col-md-6 col-sm-6"><div>';
                     $message.='<i class="zmdi zmdi-calendar-alt zmdi-hc-lg"></i>&nbsp;&nbsp;<span>'.date("l d F Y - h:i A",strtotime($value->departure_date)).'</span>';
                     $message.='</div><div class="margin-top-10">';
                     if($value->profile_pic=='default.png')
@@ -559,7 +560,7 @@ class dashboardRepository
                         $message.='<input type="radio" class="star1 star1-1" id="star-b1" value="1" disabled="disabled"/><label for="star-b1" class="star1 star1-1"></label>';
                     }
                     $message.='</div></div></div>';
-                    $message.='<div class="col-md-6 text-right">';
+                    $message.='<div class="col-md-6 col-sm-6 text-right">';
                     $message.='<div>';
                     $message.='<span style="color:#777">Offered Seats - '.$value->offer_seat.'</span>';
                     $message.='</div>';
@@ -572,9 +573,9 @@ class dashboardRepository
                     $message.='</div>';
                     $message.='<div class="clearfix"></div>';
                     $message.='<hr/>';
-                    $message.='<div class="col-md-6">';
+                    $message.='<div class="col-md-6 col-sm-6">';
                     $message.='</div>';
-                    $message.='<div class="col-md-6 text-right">';
+                    $message.='<div class="col-md-6 col-sm-6 text-right">';
                     $message.='<span><a href="'.route('get.ride.offer',$value->rideId).'"><i class="zmdi zmdi-eye zmdi-hc-lg"></i> See ride offer  </a></span> ';
                     $message.='</div>';
                     $message.='</div>';

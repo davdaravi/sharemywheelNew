@@ -14,6 +14,7 @@ footer.footer ul li
 }
 footer.footer ul li a{  color: #0D606D;}
 /*loading css start*/
+.PLR0{ padding-left: 0px !important; padding-right: 0px !important;}
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .se-pre-con {
@@ -24,6 +25,22 @@ footer.footer ul li a{  color: #0D606D;}
     height: 100%;
     z-index: 9999;
     background: url(/images/loader/loader3.gif) center no-repeat #fff;
+}
+.mainLogo{
+    margin-top: 1px;
+}
+.afterLogin .mainLogo{
+    margin-top: 0px;
+}
+.rideBtns a.btn{
+    margin-top: 7px!important;
+}
+.navbar .navbar-brand {
+    height: 50px;
+    padding: 0px 9px;
+}
+.afterLogin .navbar-nav {
+    margin: 2px -15px 0px 0px !important;
 }
 /*loading css ends*/
 /* message inbox css start*/
@@ -80,7 +97,7 @@ footer.footer ul li a{  color: #0D606D;}
 .contactDetails i{ font-size: 32px; color: #03a9f4; margin: 20px 0px;}
 .contactDetails b{ font-size: 20px;}
 .contactDetails span{ color: #888;}
-
+.userDetails div.stars1{ width: auto !important;}
 .validation_error
 {
     color:#e53935;
@@ -97,7 +114,6 @@ footer.footer ul li a{  color: #0D606D;}
     border-bottom: 2px solid #e53935 !important;
 }
 .validation_error_border:focus{ background-image:none !important; }
-.mainLogo{margin-top:-16px;}
 .navbar-default {
     background-color: #FFFFFF;
     border-color: #37C2D8;
@@ -127,16 +143,17 @@ footer.footer ul li a{  color: #0D606D;}
 .filter_div_height
 {
     height: 120px;
-    overflow: scroll;
+    overflow: auto;
 }
 .margin-top-5{margin-top:5px!important;}
-.margin-top-10{margin-top:10px!important;}
+.margin-top-10 , .MT10{margin-top:10px!important;}
 .margin-top-15{margin-top:15px!important;}
 .margin-top-20{margin-top:20px!important;}
 .margin-top-25{margin-top:25px!important;}
 .margin-top-30{margin-top:25px!important;}
 .margin-top-45{margin-top:45px!important;}
 .margin-bottom-0{margin-bottom: 0px !important;}
+.no-padding{padding:0px;}
 .bannerImg{width:100%;}
 .searchForm{
     position: relative;
@@ -225,6 +242,7 @@ footer.footer ul li a{  color: #0D606D;}
     font-weight: 600;
     color: #2ABCA3;
     font-family:ubuntu;
+    line-height: 2.4em;
 }
 label{font-weight:100;}
 label.control-label{font-weight:600;}
@@ -264,7 +282,7 @@ label.control-label{font-weight:600;}
     padding: 8px;
 }
 .sharingRideSearch {
-    padding-top: 8px;
+    padding: 8px 0px;
     background: #9ACD32;
     box-shadow: 0 2px 5px 0 rgba(206, 206, 206, 0.16),0 2px 10px 0 rgba(193, 193, 193, 0.12);
     border: 1px solid #DADADA;
@@ -292,7 +310,7 @@ hr {
     font-size: 18px;
     color:#046675;
 }
-.sharingContentBody{margin-bottom:60px;}
+.sharingContentBody{margin-bottom:10px;}
 b, strong {font-weight: 500;}
 thead{display:none;}
 .zmdi-hc-3x {
@@ -472,6 +490,11 @@ small{
 
 
 /* material design */
+.header-facebook{ padding-top: 9px !important; text-align: center;}
+.header-facebook .zmdi-facebook{ font-size: 22px; padding-top: 4px; border-radius: 50%; box-shadow:0 2px 2px 0 rgba(0, 0, 0, 0.3);color: #fff !important; height: 30px; width: 30px;background: #4867AA}
+.header-facebook .zmdi-facebook:hover{ background: #4867AA; transition: 0.3s all ease-in; color: #fff !important;} 
+.header-facebook:hover .zmdi-facebook{ color: #2ABCA3;}
+
 .navbar.navbar, .navbar-default.navbar{background:#fff;}
 .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
     color: #000;
@@ -498,7 +521,6 @@ small{
     padding-bottom: 10px;
 }
 .navbar .navbar-brand {
-    height: 48px;
     line-height: 15px;
 }
 .btn {
@@ -508,7 +530,7 @@ small{
 .bannerImage{
     position: relative;
     background: #fff;
-    height: 330px;
+    height: auto;
     overflow: hidden;
 }
 #slider-pattern {
@@ -532,6 +554,8 @@ small{
     background: #fff;
 }
 @media (max-width: 767px){
+    .userDetails div.stars1{ width: auto !important;}
+    .xs-text-center{ text-align: center !important;}
     .bx-wrapper img{max-width: 100%!important}
     .xs-PLR{ padding-left: 0px; padding-right: 0px; margin-top: 15px;}
     .profile-main{ padding-right: 0px; margin-top: 15px;}
@@ -570,11 +594,12 @@ small{
     margin-top: 10px;
 }*/
 
+
 .modal-header h4{color: #00aa9a; padding: 0px 0px 10px 0px;}
 .modal-content hr{ background-color: #00aa9a;}
 .modal-content .teal{color: #00aa9a; }
-
-.wallet{ margin-top: 5px; margin-right: 15px;}
+.profileMenu{margin-top:3px;}
+.wallet{ margin-top: 9px; margin-right: 15px;}
 .wallet span{ color: #333;}
 .wallet span b{ font-weight: bold;}
 .wallet div{ display: inline-block;}
@@ -584,3 +609,383 @@ small{
 .coupan-code h4{ padding-bottom: 15px; border-bottom: 3px solid #009688; display: inline-block;}
 .coupan-code .amount-div{ margin-top: 20px; margin-bottom: 30px;}
 .coupan-code .amount-div .col-md-4{ padding-left: 0px;}
+.navbar .navbar-nav .open .dropdown-menu > li > a:hover{color:#000;}
+.navbar.navbar-default .container-fluid{padding:9px;}
+.rideListName{padding-left: 19px;}
+.carOwnerImage,.carImage{float: left;width: 95px;}
+.carOwnerDetails{float: left;width: auto;}
+.carDetails{float: left;width: 153px;}
+.col-md-3.text-right.xs-text-center.PLR0.col-sm-4 .stars1{ left: 0px !important;}
+div.stars1 {
+    width: 145px;
+    position: relative;
+    left: -9px;
+}
+.profileBlock div.stars1 {
+    width: auto;
+    position: relative;
+    left: -3px;
+} 
+.modal{z-index: 9999999;}
+.main{margin-bottom: 50px;}
+.reverseButton{
+    float: left;
+    margin-top: 10px;
+}
+.co-traveller,.seatLeft{
+    float: left;   
+    width: 110px;
+}
+.userProfile{
+    float: left;
+    width: 100px;
+}
+.userDetails{float: left;width: 120px;}
+.birthYear{
+    float: left;
+    width: 86px;
+    margin-left: 14px;
+}
+.currentYear{
+    float: left;
+    width: 176px;
+    margin-top: -8px;
+}
+/* -------------------------------- Responsive Design ---------------------------------- */
+
+@media only screen and (max-width: 1290px){
+    .profileBlock{width: 28%;}
+}
+@media only screen and (max-width: 1200px){
+    .ownerDetailName{padding:0px;}
+    
+    .footer .container{width: 100%;padding: 0px;}
+}
+
+@media only screen and (max-width: 1023px){
+    .container {
+        width:100%;
+    }
+    .footer-link{
+        text-align: center;
+    }
+    .footer-link ul{padding: 0px;}
+}
+@media only screen and (max-width: 990px){
+    .main{margin-bottom:90px;}
+    .footer{
+        height: 80px;
+    }
+    .rideListName {
+        padding-left: 0px;
+    }
+    .poweredBy {
+        line-height: 1.4em;
+    }
+    
+    .rideListName{text-align: left;}
+    .sharingRideGrid h3 {
+        font-size: 15px;
+    }
+    .profileBlock{
+        width: auto;
+    }
+    .ownerDetailProfile{
+        width:98px;
+    }
+}
+@media only screen and (max-width: 910px){
+    .afterLogin .btn.btn-sm{
+        padding: 5px 6px;
+    }
+    .nav>li>a {
+        padding: 10px 10px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .reverseButton {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+        float: none;
+        padding-bottom: 4px;
+    }
+    .header-facebook{ text-align: left !important;}
+    .header-facebook .zmdi-facebook{ text-align: center;}
+    .number-pos{ display: none;}
+    .bannerImage {
+        height: auto;
+        overflow: hidden;
+    }
+    .carImages img{
+        width: 200px;
+        margin: 0 auto;
+        text-align: center;
+        float: right;
+    }
+    .carImages {
+        margin-top: -58px;
+    }
+    footer.footer .col-md-12{
+        padding: 0px;
+    }
+    footer.footer ul{
+        padding:0px;
+    }
+    .searchForm {
+        margin-top: -148px;
+        width: 315px;
+    }
+    .homePage .carImages {
+        margin-top: -184px;
+    }
+    .afterLogin .navbar-header{
+        margin-bottom: 5px;
+        margin-top: 7px;
+    }
+    .nav > li.wallet{
+        display: inline-block;
+        margin-left: 20px;
+    }
+    .profileMenu{
+        margin-left: 10px;
+    }
+    .profileBlock div.stars1 {
+        position: relative;
+        left: -3px;
+        width: -moz-max-content;
+        width: -webkit-max-content;
+    }
+    ul#maincontent li{
+        width: 25%; 
+    }
+}
+@media only screen and (max-width: 630px){
+    .rideBtns a.btn {
+        margin-top: 8px !important;
+    }
+    .main{margin-bottom:0px;}
+    .footer {
+        margin-top: 10px;
+        background: #F9B316;
+        position: relative;
+        bottom: 0;
+    }
+    .footer{
+        height: auto;
+    }
+    .poweredBy {
+        line-height: 1.5em;
+        text-align: center;
+    }
+    footer.footer ul li {
+        display: inline-block;
+        margin-left: 16px;
+        width: 40%;
+    }
+    .footer-link{text-align: left;}
+    .bannerImage {
+        height: auto;
+        overflow: hidden;
+    }
+    .headerBtn{
+        padding: 6px 7px;
+        font-size: 11px;
+        top: 3px;
+        float: right;
+        width: 110px;
+        margin-right: 23px;
+    }
+    .afterLogin .logoContent {
+        font-size: 16px;
+        line-height: 3.3em;
+    }
+    .profileBlock div.stars1 {
+        position: relative;
+        left: -24px;
+        width: 113px!important;
+    }
+}
+@media only screen and (min-width: 597px) and (max-width: 608px){
+    .rideBtns a.btn {
+        margin-top: 7px !important;
+    }
+    .headerBtn{
+        padding: 6px 7px;
+        font-size: 11px;
+        top: 3px;
+        float: right;
+        width: 92px;
+        margin-right: 23px;
+    }
+    .afterLogin .logoContent {
+        font-size:20px;
+        line-height: 2.4em;
+    }
+    .rideBtns{
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        float: right;
+    }
+    ul#maincontent li{
+        width: 50%; 
+    } 
+}
+
+@media only screen and (max-width:598px){
+
+    .rideBtns a.btn {
+        margin-top:0px !important;
+    }
+    .headerBtn {
+        padding: 6px 12px;
+        font-size: 15px;
+        top: -3px;
+        width: auto;
+        margin-right: 23px;
+        float: none;
+    }
+    .afterLogin .navbar-header {
+        height: 87px;
+    }
+    .afterLogin .logoContent {
+        font-size:20px;
+        line-height: 2.4em;
+    }
+    .rideBtns{
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        float: right;
+    }
+    ul#maincontent li{
+        width: 50%; 
+    } 
+}
+@media only screen and (max-width: 480px){
+    .rideListName{padding-left:0px;}
+    .footer {
+        background: #F9B316;
+        position: relative;
+        bottom: 0;
+    }
+    .footer{
+        height: auto;
+    }
+    .poweredBy {
+        line-height: 1.5em;
+        text-align: center;
+    }
+    footer.footer ul li {
+        display: inline-block;
+        margin-left: 16px;
+        width: 40%;
+    }
+    .bannerImage {
+        height: auto;
+        overflow: hidden;
+    }
+    .searchForm {
+        margin-top: -90px;
+    }
+    .afterLogin .btn.btn-info{
+        margin-left: 9%;
+    }
+    .wallet {
+        margin-right: 15px;
+        margin-top: 5px;
+        margin-left: 18px;
+    }
+    .logoContent {
+        font-size: 14px;
+        line-height: 3.4em;
+    }
+    .afterLogin.navbar .navbar-brand {
+        height: 50px;
+        padding: 0px 0px;
+    }
+    .afterLogin .logoContent {
+        font-size: 16px;
+        line-height: 3.2em;
+    }
+    .rideBtns {
+        text-align: center;
+        display: block;
+        width: 313px;
+        margin: 0 auto;
+        float: right;
+        margin-top: 3px;
+        margin-right: -8px;
+    }
+    .searchForm{
+        width: 303px;
+        margin: 0 auto;
+        float: none;
+        margin-top: -90px;
+        left: -8px;
+    }
+    .detailBlock {
+        padding: 0px;
+    }
+    .carOwnerImage{width:70px;}
+    .carOwnerImage img{width:70px;height: 70px;}
+    .carOwnerDetails {
+        text-align: left;
+        margin-left: 4px;
+    }
+    #personalInfo .col-xs-4.col-sm-3.col-md-3{padding-left:0px;}
+    .chat-box .chat-list {
+        min-height: auto;
+        max-height: 300px;
+    }
+    #sendMsgBtn{margin-top:5px;}
+    .rideBtns a.btn {
+        margin-top: 5px !important;
+    }
+    #ratingReceivedTable .col-md-3,#ratingReceivedTable h5,#ratingGivenTable .col-md-3,#ratingGivenTable h5{text-align: center;}
+    #paidTransactionTable label.control-label,#earnTransaction label.control-label{
+        display: none;
+    }
+    
+    .ownerDetailProfile {
+        width: 71px;
+    }
+    .carOwnerPage{padding: 0px;}
+    .carOwnerPage .carImage {
+        float: left;
+        width: 82px;
+    }
+    .carOwnerPage .carDetails {
+        float: left;
+        width: 115px;
+    }
+    .carImage {
+        float: left;
+        width: 70px;
+    }
+    .carDetails {
+        float: left;
+        width: 143px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width:1280px){
+    .bannerImage {
+        position: relative;
+        background: #fff;
+        height: auto;
+        overflow: hidden;
+    }
+    .afterLogin .navbar-header{
+        margin-bottom: 5px;
+        margin-top: 7px;
+    }
+    .userDetails div.stars1{ width: auto !important;}
+}
+
+@media only screen and (min-width: 768px) and (max-width:775px){
+   .sorting_1.profileBlock{ padding-right: 5px !important;}
+}
