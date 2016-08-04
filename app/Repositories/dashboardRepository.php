@@ -629,7 +629,7 @@ class dashboardRepository
                         if(count($findcoupan)>0)
                         {
                             //check weather coupan is expired or not
-                            if($findcoupan[0]->start_date<=$date && $findcoupan[0]->end_date>=$date)
+                            if(date("Y-m-d",strtotime($findcoupan[0]->start_date))<=$date && date("Y-m-d",strtotime($findcoupan[0]->end_date))>=$date)
                             {
                                 //check if user has already avail this coupan code or not
                                 $checkUserCoupan=DB::table('user_coupan_code')->where('userId',session('userId'))->where('coupanId',$findcoupan[0]->id)->get();

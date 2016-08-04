@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */ //<li><a href="{{url('/github')}}" class="dropdown-toggle">Github</a></li>-->
-Route::group(['domain' => 'www.smw.com'], function () {
+//Route::group(['domain' => 'www.smw.com'], function () {
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/getCity',[
@@ -371,7 +371,7 @@ Route::group(['middleware'=>['web','login']],function(){
     ]);
 });
 
-});
+//});
 //----------api which requried defult key for access. defultToken-----------------------
  Route::group(['prefix' => 'api/v1', 'middleware' => 'defultToken'], function(){
         Route::post('/login','Api@login');
