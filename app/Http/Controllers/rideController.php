@@ -68,4 +68,13 @@ class rideController extends Controller
     {
         return $rideRepository->findride();
     }
+
+    public function statusMessage(rideRepository $rideRepository)
+    {
+        return $rideRepository->statusMessage();
+    }
+    public function bookedRidePaymentMessage(rideRepository $rideRepository)
+    {
+        return $rideRepository->bookedRidePaymentMessage();
+    }
 }

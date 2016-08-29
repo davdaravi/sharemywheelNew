@@ -1,7 +1,7 @@
 <footer class="footer">
 	<div class="container">
     	<div class="row">
-    		<div class="col-md-12 no-paddding">
+    		<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="col-md-7 col-xs-12 col-sm-12 footer-link">
 					<ul>
 						<li><a href="/about">About us</a></li>

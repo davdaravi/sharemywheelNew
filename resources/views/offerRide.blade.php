@@ -191,7 +191,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-md-12 margin-top-10" style="margin-bottom:0px">
-                        <div class="col-md-12"><span style="color:red">Note: You have to pay 25 Rs. to offer a daily ride.</span></div>
+                        <div class="col-md-12"><span style="color:red" id="dailynote"></span></div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-md-12 margin-top-10">
@@ -272,7 +272,7 @@
     </div>
 </div>
 <!-- daily ride payment model ends-->
-<form method="post" name="redirect" target="_blank" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
+<form method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
     <input type="hidden" name="encRequest" id="encRequest" value="">
     <input type="hidden" name="access_code" id="access_code" value="">
 </form>

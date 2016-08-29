@@ -1,30 +1,11 @@
 @extends("master")
 
 @section("head")
-    <title>Share My Wheel - Refund & Cancellation</title>
+    <title>Share My Wheel - Status</title>
     <style type="text/css">
     .b1{font-weight: bold}
     .n1{font-weight: normal}
-    .container article p{font-family: "Times New Roman", Georgia, Serif;word-wrap: break-word;}
-
-    .refund-policy{ 
-        padding: 15px;
-        text-align: center;
-        margin: 0 auto;
-    }
-    .refund-policy .steps-div{ 
-        padding: 30px;
-        border: 2px solid #2ABCA3;
-        border-radius: 50%;
-        width: 170px;
-        text-align: center;
-        margin: 0 auto;
-    }
-    .refund-policy span{ font-weight: bold; font-size: 16px;}
-    .refund-policy .number-pos{ padding: 7px; border-radius: 50%; background: #F9B316; position: absolute; top: 16%; height: 25px; width: 25px; line-height: 12px; }
-    .color-2ABCA3{ color: #2ABCA3; }
-    .pictorial ul{ padding-bottom: 50px;}
-    .pictorial ul li{ list-style: none; padding-left: 10px; margin-bottom: 10px; }
+    .container .article p{font-family: "Times New Roman", Georgia, Serif;word-wrap: break-word;}
     </style>
 @endsection
 @section("nav")
@@ -35,67 +16,38 @@
     @endif
 @endsection
 @section("content")
-<div class="container margin-top-10" style="background:white">
+<div class="container margin-top-10" style="background:white;">
     <div class="row">
-        <div class="col-md-12 margin-top-30">
-            <article>
-            <header><a href="/home"><- Back to Home</a></header>
-            <h3 style="color:#2ABCA3">Refund & Cancellation</h3>
-            </article>
-        </div>
-        <div class="col-sm-10  col-xs-12 col-md-7 col-md-offset-2 col-sm-offset-1">
-            <div class="col-sm-4 col-md-4">
-                <div class="refund-policy">
-                <div class="steps-div">
-                    <img src="{{asset('images/mail.png')}}" class="img-responsive">
-                </div>
-                <div class="number-pos">1</div>
-                <br>
-                <span>Raise request via mail</span>
+    <div class="col-md-12 article paymentStatusPage text-center margin-top-30">
+    	<!-- <div class="paymentStatusSuccess">
+            <i class="zmdi zmdi-check"></i>
+            <h2>Thank You.</h2>
+            <p>You are now signed out of Zoho Mail.</p>
+            <a href="#">Go to Home</a>
+        </div> -->
+        @if(Session::has('offersuccess'))
+            <div class="paymentStatusSuccess">
+                <i class="zmdi zmdi-check"></i>
+                <h2>Thank You.</h2>
+                <p>{{session('offersuccess')}}</p>
+                <a href="{{route('get.login')}}">Go to Home</a>
             </div>
+        @elseif(Session::has('offerfailure'))
+            <div class="paymentStatusUnsuccess">
+                <i class="zmdi zmdi-close"></i>
+                <p class="margin-top-30">{{session('offerfailure')}}</p>
+                <a href="{{route('get.login')}}">Go to Home</a>
             </div>
+        @endif
 
-            <div class="col-sm-4 col-md-4">
-                <div class="refund-policy">
-                <div class="steps-div">
-                    <img src="{{asset('images/call.png')}}" class="img-responsive">
-                </div>
-                <div class="number-pos">2</div>
-                <br>
-                <span>Receive call</span>
-            </div>
-            </div>
-
-            <div class="col-sm-4 col-md-4">
-                <div class="refund-policy">
-                <div class="steps-div">
-                    <img src="{{asset('images/dollar.png')}}" class="img-responsive">
-                </div>
-                <div class="number-pos">3</div>
-                <br>
-                <span>Refund amount</span>
-            </div>
-            </div>
-        </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-sm-12 pictorial">
-            <h3 class="color-2ABCA3">Steps:</h3>
-
-            <ul>
-                <li>1. Raise request via mail <a href="mailto:info@sharemywheel.com">info@sharemywheel.com</a> and mention the validate reason in the body.</li>
-                <li>2. You will receive call from the help desk within 3-4 working days.</li>
-                <li>3. Instructor will instruct you that you will receive the refund amount via wallet or cash by 10-15 working days.</li>
-            </ul>
-        </div>
-    </div>
 </div>
 @if(Session::has('userId'))
 @else
 @include('loginModal')
 @endif
-
 @endsection
 @section("js")
 @if(Session::has('userId'))
@@ -151,9 +103,6 @@
 
         $(document).ready(function(){
 
-            $('#forgotPassword').on('hidden.bs.modal', function () {
-                $('body').css('padding-right','0px');
-            });
             $(".frgpassword").click(function(){
                 $("#loginModal").modal('hide');
                 $("#forgotPassword").modal('show');

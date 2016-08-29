@@ -115,7 +115,9 @@
                 }
         });
         $(document).ready(function(){
-
+            $('#forgotPassword').on('hidden.bs.modal', function () {
+                $('body').css('padding-right','0px');
+            });
             $(".frgpassword").click(function(){
                 $("#loginModal").modal('hide');
                 $("#forgotPassword").modal('show');

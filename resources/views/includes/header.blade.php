@@ -8,9 +8,8 @@
 
 <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('css/roboto.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{URL::asset('css/material.css')}}" type="text/css"/>
-<link href="{{URL::asset('css/ripples.css')}}" rel="stylesheet" type="text/css">
-<link href="{{URL::asset('css/roboto.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{URL::asset('css/material.css')}}"/>
+<link href="{{URL::asset('css/ripples.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{URL::asset('css/main.css')}}">
 <link rel="stylesheet" href="{{URL::asset('fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.min.css')}}" rel="stylesheet">

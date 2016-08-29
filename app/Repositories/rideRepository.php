@@ -5,6 +5,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Validator; 
 use DB;
+use App\Http\Controllers\HelperController;
 use Mail;
 use Response;
 class rideRepository
@@ -651,7 +652,7 @@ class rideRepository
                     // dd($value);
                     
                     $newrideData = array();
-                    $message='<a href="ridedetail/'.$value->sourcename.'_'.$value->destinationname.'_'.$value->rideId.'" target="_blank">';
+                    $message='<a href="ridedetail/'.$value->sourcename.'_'.$value->destinationname.'_'.$value->rideId.'" target="_blank" class="profileBlock">';
                     $message.='<div style="overflow:hidden"><div class="col-md-4 no-padding margin-top-5">';
                     if($value->profile_pic=='default.png')
                     {
@@ -1127,7 +1128,7 @@ class rideRepository
                                             $dd['seat']=$seat;
                                             if($findride[0]->isDaily==0)
                                             {
-                                                $dd['amount']=$totalFinal;
+                                                $dd['amount']=$totalCost;
                                             }
                                         }
                                         if(count($bookedPersonDetail)>0)
@@ -1140,6 +1141,22 @@ class rideRepository
                                             if($dd['email']!="")
                                             {
                                                 $this->send_ride_email($dd['email'],$dd);
+                                                //send sms
+                                                if($offerPersonDetail[0]->phone_no!="" && $offerPersonDetail[0]->phone_no>0)
+                                                {
+                                                    $offermsg='Your offer is been booked by '.$dd['bookedname'].'. Source :'.$dd['source'].'. Destination :'.$dd['destination'].'. Passenger email :'.$dd['bookedemail'].', Seats book :'.$dd['seat'];
+                                                    if(isset($dd['amount']))
+                                                    {
+                                                        $offermsg.=' , Amount earn: '.$dd['amount'].' Rs , ';
+                                                    }
+                                                    $offermsg.='Time :'.$dd['time'].' , Date :'.$dd['date'];
+                                                    
+                                                    $ph=$offerPersonDetail[0]->phone_no;
+                                                    \Queue::push(function($job) use($ph,$offermsg){
+                                                        HelperController::send_offer_sms($ph,$offermsg);
+                                                        $job->delete();
+                                                    });  
+                                                }
                                             }
                                         }
                                         if(isset($dd['bookedemail']))
@@ -1147,6 +1164,21 @@ class rideRepository
                                             if($dd['bookedemail']!="")
                                             {
                                                 $this->send_book_ride_email($dd['bookedemail'],$dd);
+                                                if($bookedPersonDetail[0]->phone_no!="" && $bookedPersonDetail[0]->phone_no>0)
+                                                {
+                                                    $bookedmsg='Your ride has been successfully booked.';
+                                                    $bookedmsg.=' Source :'.$dd['source'];
+                                                    $bookedmsg.=' . Destination :'.$dd['destination'];
+                                                    $bookedmsg.=' . Owner email :'.$dd['email'];
+                                                    $bookedmsg.=' , Seats book :'.$dd['seat'];
+                                                    $bookedmsg.=' , Time :'.$dd['time'];
+                                                    $bookedmsg.=' , Date :'.$dd['date'];
+                                                    $ph=$bookedPersonDetail[0]->phone_no;
+                                                    \Queue::push(function($job) use($ph,$bookedmsg){
+                                                        HelperController::send_offer_sms($ph,$bookedmsg);
+                                                        $job->delete();
+                                                    }); 
+                                                }
                                             }
                                         }
                                         //ends
@@ -1241,7 +1273,7 @@ class rideRepository
                 return response($response,400);    
             }
         }
-        catch(\Exception $e)    
+        catch(Exception $e)    
         {
             //return redirect()->back()->withErrors(['error'=>true])->withInput();
             \Log::error('bookRide function error: ' . $e->getMessage());
@@ -1314,27 +1346,28 @@ class rideRepository
                     return response($response,200);
                 }
 
-                $data['merchant_id']=89593;
+                $data['tid']=time();
+                $data['merchant_id']=89903;
                 $data['order_id']=$data['tid'];
                 $data['amount']=$total_price;
                 $data['currency']="INR";
-                $data['redirect_url']="http://www.sharemywheel.info/getsuccessPayment";
-                $data['cancel_url']="http://www.sharemywheel.info/getsuccessPayment";
+                $data['redirect_url']="http://sharemywheel.info/getsuccessPayment";
+                $data['cancel_url']="http://sharemywheel.info/getsuccessPayment";
                 $data['language']="EN";
                 $data['merchant_param1']=$rideid;//ride id
                 $data['merchant_param2']=$total_price;//total amount
                 $data['merchant_param3']=session('userId');//boooked user id
                 $data['merchant_param4']=$seat;//no of seats
                 $data['merchant_param5']=$fetchRide[0]->isDaily;//is daily 
-                $working_key='D8D17336E34ECFE458CCE9D13EE7E640';
-                $access_code='AVKF65DF69BB16FKBB';
+                $working_key='A087123D0EA8318575EA3EDDDF177F7E';
+                $access_code='AVUD66DH35AD37DUDA';
                 $merchant_data="";
                 
                 foreach ($data as $key => $value){
                     $merchant_data.=$key.'='.$value.'&';
                 }
 
-                $encrypted_data=encrypt($merchant_data,$working_key);
+                $encrypted_data=$this->encrypt($merchant_data,$working_key);
 
                /* $rcvdString=decrypt($encrypted_data,$working_key);      //Crypto Decryption used as per the specified working key.
                 $order_status="";
@@ -1375,11 +1408,11 @@ class rideRepository
     }
     function encrypt($plainText,$key)
     {
-        $secretKey = hextobin(md5($key));
+        $secretKey = $this->hextobin(md5($key));
         $initVector = pack("C*", 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f);
         $openMode = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '','cbc', '');
         $blockSize = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, 'cbc');
-        $plainPad = pkcs5_pad($plainText, $blockSize);
+        $plainPad = $this->pkcs5_pad($plainText, $blockSize);
         if (mcrypt_generic_init($openMode, $secretKey, $initVector) != -1) 
         {
               $encryptedText = mcrypt_generic($openMode, $plainPad);
@@ -1391,9 +1424,9 @@ class rideRepository
 
     function decrypt($encryptedText,$key)
     {
-        $secretKey = hextobin(md5($key));
+        $secretKey = $this->hextobin(md5($key));
         $initVector = pack("C*", 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f);
-        $encryptedText=hextobin($encryptedText);
+        $encryptedText=$this->hextobin($encryptedText);
         $openMode = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '','cbc', '');
         mcrypt_generic_init($openMode, $secretKey, $initVector);
         $decryptedText = mdecrypt_generic($openMode, $encryptedText);
@@ -1440,29 +1473,31 @@ class rideRepository
     {
         try
         {
-            $workingKey='D8D17336E34ECFE458CCE9D13EE7E640';     //Working Key should be provided here.
+            $workingKey='A087123D0EA8318575EA3EDDDF177F7E';     //Working Key should be provided here.
             $encResponse=$_POST["encResp"];         //This is the response sent by the CCAvenue Server
-            $rcvdString=decrypt($encResponse,$workingKey);      //Crypto Decryption used as per the specified working key.
+            $rcvdString=$this->decrypt($encResponse,$workingKey);      //Crypto Decryption used as per the specified working key.
             $order_status="";
             $decryptValues=explode('&', $rcvdString);
             $dataSize=sizeof($decryptValues);
-
+            $data=array();
             for($i = 0; $i < $dataSize; $i++) 
             {
                 $information=explode('=',$decryptValues[$i]);
                 $data[$information[0]]=$information[1];
-            }
-
-            for($i = 0; $i < $dataSize; $i++) 
-            {
-                $information=explode('=',$decryptValues[$i]);
                 if($i==3)   $order_status=$information[1];
             }
 
             if($order_status==="Success")
             {
-                $ridedata=DB::table('rides')->where('id',$data['merchant_param1'])->get();
-                if($data['merchant_param5']==1)
+                $rideid=$data['merchant_param1'];
+                $total_price=$data['merchant_param2'];
+                $userid=$data['merchant_param3'];
+                $no_of_seats=$data['merchant_param4'];
+                $isDaily=$data['merchant_param5'];
+
+                
+                $ridedata=DB::table('rides')->where('id',$rideid)->get();
+                if($isDaily==1)
                 {
                     $amount=0;
                     $tax=27.5;
@@ -1470,36 +1505,155 @@ class rideRepository
                 }
                 else
                 {
-                    $amount=(100*$data['merchant_param2'])/110;
-                    $tax=$data['merchant_param2']-$amount;
+                    $amount=(100*$total_price)/110;
+                    $tax=$total_price-$amount;
                     $daily=0;
                 }
-                $insertArray=array("offer_userId"=>$ridedata[0]->userId,"book_userId"=>$data['merchant_param3'],"rideId"=>$data['merchant_param1'],"source"=>$ridedata[0]->departureOriginal,"destination"=>$ridedata[0]->arrivalOriginal,"no_of_seats"=>$data['merchant_param4'],"cost_per_seat"=>$amount,"paymentType"=>"ccavenu");
-                $insertAdminWallet=array("rideId"=>$data['merchant_param1'],"userId"=>$data['merchant_param3'],"amount"=>$tax,"bookType"=>"book","isDaily"=>$daily);          
+                $insertArray=array("offer_userId"=>$ridedata[0]->userId,"book_userId"=>$userid,"rideId"=>$rideid,"source"=>$ridedata[0]->departureOriginal,"destination"=>$ridedata[0]->arrivalOriginal,"no_of_seats"=>$no_of_seats,"cost_per_seat"=>$amount,"paymentType"=>"ccavenu");
+                $insertAdminWallet=array("rideId"=>$rideid,"userId"=>$userid,"amount"=>$tax,"bookType"=>"book","isDaily"=>$daily);          
+
+                DB::beginTransaction();
 
                 DB::table('ride_booking')->insert($insertArray);
                 DB::table('admin_wallet')->insert($insertAdminWallet);
-                $this->request->session()->flash('status', 'Your ride has been successfully booked');
-                return redirect('/bookedRidePaymentMessage');
+
+                //check wallet amount exists for offer rider
+                $che=DB::table('payment_wallete')->where('userId',$ridedata[0]->userId)->get();
+                if(count($che)>0)
+                {
+                    //update wallet amount... amount add in offer userid account
+                    DB::table('payment_wallete')->where('userId',$ridedata[0]->userId)->update(['amount'=>$che[0]->amount+$amount]);
+                }
+                else
+                {
+                    //insert amount in offer userid account
+                    DB::table('payment_wallete')->insert(['userId'=>$ridedata[0]->userId,'amount'=>$amount]);
+                }
+
+
+                //remaining code
+                //minus available seat of a ride
+                $st=DB::table('rides')->where('id',$rideid)->update(['available_seat'=>$ridedata[0]->available_seat-$no_of_seats]);
+                if($st)
+                {
+                    //send booked email
+                    //GET DETAILS OF OFFERED PERSON
+                    $offerPersonDetail=DB::table('users')->where('id',$ridedata[0]->userId)->get();
+                    //GET RIDE DETAILS
+                    //$offerRideDetail=DB::table('rides')->where('id',$bookRideArray['offerid'])->get();
+                    //GET DETAILS OF BOOKED PERSON
+                    $bookedPersonDetail=DB::table('users')->where('id',$userid)->get();
+
+                    if(count($offerPersonDetail)>0)
+                    {
+                        $dd['username']=$offerPersonDetail[0]->username;
+                        $dd['email']=$offerPersonDetail[0]->email;    
+
+                    }
+                    if(count($ridedata)>0)
+                    {
+                        $dd['date']=date("d-m-Y",strtotime($ridedata[0]->departure_date));
+                        $dd['time']=date("H:i:s",strtotime($ridedata[0]->departure_date));
+                        $dd['source']=$ridedata[0]->departureOriginal;
+                        $dd['destination']=$ridedata[0]->arrivalOriginal;
+                        $dd['seat']=$no_of_seats;
+                        if($ridedata[0]->isDaily==0)
+                        {
+                            $dd['amount']=$amount;
+                        }
+                    }
+                    if(count($bookedPersonDetail)>0)
+                    {
+                        $dd['bookedname']=$bookedPersonDetail[0]->username;
+                        $dd['bookedemail']=$bookedPersonDetail[0]->email;
+                    }
+                    if(isset($dd['email']))
+                    {
+                        if($dd['email']!="")
+                        {
+                            $this->send_ride_email($dd['email'],$dd);
+                            //send sms
+                            if($offerPersonDetail[0]->phone_no!="" && $offerPersonDetail[0]->phone_no>0)
+                            {
+                                $offermsg='Your offer is been booked by '.$dd['bookedname'].'. Source :'.$dd['source'].'. Destination :'.$dd['destination'].'. Passenger email :'.$dd['bookedemail'].', Seats book :'.$dd['seat'];
+                                if(isset($dd['amount']))
+                                {
+                                    $offermsg.=' , Amount earn: '.$dd['amount'].' Rs , ';
+                                }
+                                $offermsg.='Time :'.$dd['time'].' , Date :'.$dd['date'];
+                                
+                                $ph=$offerPersonDetail[0]->phone_no;
+                                \Queue::push(function($job) use($ph,$offermsg){
+                                    HelperController::send_offer_sms($ph,$offermsg);
+                                    $job->delete();
+                                });  
+                            }
+                        }
+                    }
+                    if(isset($dd['bookedemail']))
+                    {
+                        if($dd['bookedemail']!="")
+                        {
+                            $this->send_book_ride_email($dd['bookedemail'],$dd);
+                            if($bookedPersonDetail[0]->phone_no!="" && $bookedPersonDetail[0]->phone_no>0)
+                            {
+                                $bookedmsg='Your ride has been successfully booked.';
+                                $bookedmsg.=' Source :'.$dd['source'];
+                                $bookedmsg.=' . Destination :'.$dd['destination'];
+                                $bookedmsg.=' . Owner email :'.$dd['email'];
+                                $bookedmsg.=' , Seats book :'.$dd['seat'];
+                                $bookedmsg.=' , Time :'.$dd['time'];
+                                $bookedmsg.=' , Date :'.$dd['date'];
+                                $ph=$bookedPersonDetail[0]->phone_no;
+                                \Queue::push(function($job) use($ph,$bookedmsg){
+                                    HelperController::send_offer_sms($ph,$bookedmsg);
+                                    $job->delete();
+                                }); 
+                            }
+                        }
+                    }
+                    //ends
+                    //send default sms to user who has book this ride same as email
+                    $msg='Dear '.$dd['bookedname'].' ,<br>Your ride has been successfully booked.below are the offer details.<br/>';
+                    $msg.='Source :'.$dd['source'].'<br>';
+                    $msg.='Destination :'.$dd['destination'].'<br>';
+                    $msg.='Owner email :'.$dd['email'].'<br>';
+                    $msg.='Seats book :'.$dd['seat'].'<br>';
+                    $msg.='Time :'.$dd['time'].'<br>';
+                    $msg.='Date :'.$dd['date'].'<br><br>';
+                    $msg.='Enjoy your ride<br><br>';
+                    $msg.='Thank you';
+                    
+                    DB::table('user_chat_messages')->insert(['fromUserId'=>$ridedata[0]->userId,"toUserId"=>$userid,"message"=>$msg,"ip"=>$this->ip]);
+                    DB::commit();
+                    session()->flash('bookingsuccess', 'Your ride has been successfully booked');
+                    return redirect('/bookedRidePaymentMessage');      
+                }
+                else
+                {
+                    DB::rollBack();
+                    session()->flash('bookingfailure', 'Something went wrong');
+                    return redirect('/bookedRidePaymentMessage');
+                }  
                 //echo "<br>Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
                 
             }
             else if($order_status==="Aborted")
             {
                 //echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
-                $this->request->session()->flash('failure', 'Your ride is not booked');
+                session()->flash('bookingfailure', 'Your transaction has been Aborted.Please Try again to book your ride.');
                 return redirect('/bookedRidePaymentMessage');
             }
             else if($order_status==="Failure")
             {
-                $this->request->session()->flash('failure', 'Your ride is not booked');
+                session()->flash('bookingfailure', 'Your transaction has been declined.Please Try again to book your ride.');
                 return redirect('/bookedRidePaymentMessage');
                 //echo "<br>Thank you for shopping with us.However,the transaction has been declined.";
             }
             else
             {
                 //echo "<br>Security Error. Illegal access detected";
-                $this->request->session()->flash('failure', 'Your ride is not booked');
+                session()->flash('bookingfailure', 'Your transaction has been declined.Please Try again to book your ride.');
                 return redirect('/bookedRidePaymentMessage');
             }
         }
@@ -1560,6 +1714,44 @@ class rideRepository
             else
             {
                 redirect('/logout');
+            }
+        }
+        catch(\Exception $e)
+        {
+            return view('errors.404');
+        }
+    }
+
+    //status message after payment done
+    public function statusMessage()
+    {
+        try
+        {
+            if(session()->has('offersuccess') || session()->has('offerfailure'))
+            {
+                return view('statusMessage');    
+            }
+            else
+            {
+                return redirect('/');
+            }
+        }
+        catch(\Exception $e)
+        {
+            return view('errors.404');
+        }
+    }
+    public function bookedRidePaymentMessage()
+    {
+        try
+        {
+            if(session()->has('bookingsuccess') || session()->has('bookingfailure'))
+            {
+                return view('bookRidePaymentMessage');    
+            }
+            else
+            {
+                return redirect('/');
             }
         }
         catch(\Exception $e)

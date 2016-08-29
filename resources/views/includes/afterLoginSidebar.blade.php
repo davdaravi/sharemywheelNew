@@ -11,7 +11,7 @@
                 </button>
                 <a class="navbar-brand" href="{{url('/home')}}">
                 	<div class="col-md-3 col-sm-3 col-xs-3">
-                		<img src="/images/logo.png" width="50" class="mainLogo">
+                		<img src="{{asset('/images/logo.png')}}" width="50" class="mainLogo">
                 	</div>
                 	<div class="col-md-9 col-sm-9 col-xs-9">
                 		<p class="logoContent">ShareMyWheel</p>

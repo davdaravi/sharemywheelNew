@@ -89,7 +89,7 @@ footer.footer ul li a{  color: #0D606D;}
 
 .bx-wrapper .bx-next{ right: 16px;}
 .bx-wrapper .bx-viewport{background: none;border: none;box-shadow: none}
-.bx-wrapper{ width: 100% !important; margin-top: 50px; padding-left: 7px;}
+.bx-wrapper{ width: 100% !important; margin-top: 5px;}
 .bx-viewport{ height: 185px !important;}
 .bx-wrapper img{ height: 175px !important;}
 .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager{ width: 100% !important; text-align: center;}
@@ -554,6 +554,7 @@ small{
     background: #fff;
 }
 @media (max-width: 767px){
+    footer.footer{ padding: 0px 15px;}
     .userDetails div.stars1{ width: auto !important;}
     .xs-text-center{ text-align: center !important;}
     .bx-wrapper img{max-width: 100%!important}
@@ -651,6 +652,12 @@ div.stars1 {
     width: 176px;
     margin-top: -8px;
 }
+
+.paymentStatusPage { padding: 140px 0px;}
+.paymentStatusPage i{ font-size: 42px; border:2px solid #4caf50; border-radius: 50%; height: 70px; width: 70px; line-height: 70px; color: #4caf50;}
+.paymentStatusPage p{ font-weight: normal; font-size: 22px;}
+
+.paymentStatusUnsuccess i{ color: red !important; border-color: red !important;}
 /* -------------------------------- Responsive Design ---------------------------------- */
 
 @media only screen and (max-width: 1290px){

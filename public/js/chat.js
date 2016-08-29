@@ -53,7 +53,6 @@ smw.getAllMessage=function(userid,pic)
 
 smw.responsGetMessage=function(resp,param)
 {
-    console.log(resp);
     var pic=param.pic;
 
     if(Object.keys(resp['error']).length>0 && resp['status']==false)
@@ -94,7 +93,8 @@ smw.responsGetMessage=function(resp,param)
 
             //msg bind check if he is receiver or sender
             if(resp['data'][0]==resp['data'][1][i]['fromUserId'])
-            {
+            {   
+
                 var upic=$("#upic").val();
 
                 if(upic=='default.png')
@@ -188,7 +188,7 @@ smw.responsGetMessage=function(resp,param)
         else
         {
             $(".send-message").show();
-             pullData();
+            pullData();
         }
        
     }
@@ -239,7 +239,7 @@ smw.responseSendMessage=function(resp,param)
         html+='</div>';
         html+='</div>';
         html+='<div class="col-md-2 col-sm-2 col-xs-2">';
-        html+='<img src="'+upic+'" />';
+        html+='<img src="'+lpath+"/images/profile/"+param.user+"/"+upic+'" />';
         html+='</div>';
         html+='</div>';
         html+='</div>';
@@ -293,7 +293,7 @@ function pullData()
 {
     retrieveChatMessages();
     //retrieveTypingStatus();
-    settimeoutid=setTimeout(pullData,5000);
+    settimeoutid=setTimeout(pullData,60000);
 }
 
 function retrieveChatMessages()
@@ -313,7 +313,7 @@ smw.responseRetriveMessage=function(resp,param)
     {
         if(resp['data'][1].length>1)
         {
-            var pic= resp['data'][0][0]['profile_pic'];
+            var pic= resp['data'][0];
             html="";
             var datesplit=resp['data'][1][0]['createdDate'].split(" ");
             var last_date=datesplit[0];
@@ -335,7 +335,7 @@ smw.responseRetriveMessage=function(resp,param)
                 html+='<div class="row">';
                 html+='<div class="col-md-12 receiver col-sm-12 col-xs-12">';
                 html+='<div class="col-md-2 col-sm-2 col-xs-2">';
-                html+='<img src="'+pic+'" />';
+                html+='<img src="'+lpath+pic+'" />';
                 html+='</div>';
                 html+='<div class="col-md-10 col-sm-10 col-xs-10">';
                 html+='<div class="message-bubble">';

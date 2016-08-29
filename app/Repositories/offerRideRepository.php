@@ -440,7 +440,7 @@ class offerRideRepository
                                         //create data for ccavenu
                                         DB::commit();
                                         $cd['tid']=time();
-                                        $cd['merchant_id']=89593;
+                                        $cd['merchant_id']=89903;
                                         $cd['order_id']=$cd['tid'];
                                         $cd['amount']=27.5;
                                         $cd['currency']="INR";
@@ -451,16 +451,20 @@ class offerRideRepository
                                         $cd['merchant_param2']="create";
                                         $cd['merchant_param3']=session('userId');
                                         $merchant_data='';
-                                        $working_key='D8D17336E34ECFE458CCE9D13EE7E640';//Shared by CCAVENUES
-                                        $access_code='AVKF65DF69BB16FKBB';//Shared by CCAVENUES
+                                        $working_key='A087123D0EA8318575EA3EDDDF177F7E';//Shared by CCAVENUES
+                                        $access_code='AVUD66DH35AD37DUDA';//Shared by CCAVENUES
                                         
                                         foreach ($cd as $key => $value){
                                             $merchant_data.=$key.'='.$value.'&';
                                         }
 
                                         $encrypted_data=encrypt($merchant_data,$working_key); 
-                                        $data['access']='AVKF65DF69BB16FKBB';
+                                        $data['access']='AVUD66DH35AD37DUDA';
                                         $data['dd']=$encrypted_data;
+
+
+
+
                                         return Response::json(array('status'=>true,'error'=>$errors,'message'=>'','class'=>'success','data'=>$data),200);
                                         //update ride status from 1 to 0 when response back from ccavenu
                                     }   
@@ -530,7 +534,7 @@ class offerRideRepository
                                     //create data for ccavenu
                                     DB::commit();
                                     $cd['tid']=time();
-                                    $cd['merchant_id']=89593;
+                                    $cd['merchant_id']=89903;
                                     $cd['order_id']=$cd['tid'];
                                     $cd['amount']=27.5;
                                     $cd['currency']="INR";
@@ -541,16 +545,23 @@ class offerRideRepository
                                     $cd['merchant_param2']="create";
                                     $cd['merchant_param3']=session('userId');
                                     $merchant_data='';
-                                    $working_key='D8D17336E34ECFE458CCE9D13EE7E640';//Shared by CCAVENUES
-                                    $access_code='AVKF65DF69BB16FKBB';//Shared by CCAVENUES
+                                    $working_key='A087123D0EA8318575EA3EDDDF177F7E';//Shared by CCAVENUES
+                                    $access_code='AVUD66DH35AD37DUDA';//Shared by CCAVENUES
                                     
                                     foreach ($cd as $key => $value){
                                         $merchant_data.=$key.'='.$value.'&';
                                     }
 
                                     $encrypted_data=encrypt($merchant_data,$working_key); 
-                                    $data['access']='AVKF65DF69BB16FKBB';
+                                    $data['access']='AVUD66DH35AD37DUDA';
                                     $data['dd']=$encrypted_data;
+
+
+                                    /*$workingKey='A087123D0EA8318575EA3EDDDF177F7E';     //Working Key should be provided here.
+                                    $encResponse="eyJpdiI6IkoyeVpoWndEZ0hoNWFNVEN5XC9uQ3lRPT0iLCJ2YWx1ZSI6IjNEVnZsZmpubU5qaENaUlJrZXk2Wnp5bFF6Q0YyQkgwQkh4aHhxVjRjU1JrbWp1MFV0ckdpTVBRbXk0T2N6ZlVmVkJmTjY4WWdGbElESlVzS0ZZcFo4QVBLdzdcLzQwZGpsVmxTU21jN0hLempEY3hINDF6a3pmNEFaMlpsK3N5Qzc4OHMwd1ZtTEpxd09OeTNyM0puSVwvZUI0VzVJV2c0ZVYzbkVrbE13WVwvbkVyVTNRYlduMm5LOVhPWkRUcVlkeHFQdU95QkVwOWZTUWZQZ25YSGRrNEdsYlRzYnRqKzAwRnluOW5xVnF0MzFUWmdSZWlXSHpjaGJWU290ZU5PbFp6M3hZNVwvXC9jWStibTZwNFZOZWZ4Z2tPM09DTFVRU3N6bFwvK2dEanJtV1NjPSIsIm1hYyI6ImIyZWNmYWVjZDZiZmNiNTNjNDhiYmYzZGVkZjM2N2QzMzJiNzJiMjdjZGM4ZmU3MGI3NTBkZjQ4MzI1Yzc2NmIifQ==";         //This is the response sent by the CCAvenue Server
+                                    $rcvdString=decrypt($encResponse,$workingKey);   
+                                    print_r($rcvdString);
+                                    exit;*/
                                     return Response::json(array('status'=>true,'error'=>$errors,'message'=>'','class'=>'success','data'=>$data),200);
                                     //update ride status from 1 to 0 when response back from ccavenu
                                 }
@@ -590,11 +601,11 @@ class offerRideRepository
     //ccavenu functions
     function encrypt($plainText,$key)
     {
-        $secretKey = hextobin(md5($key));
+        $secretKey = $this->hextobin(md5($key));
         $initVector = pack("C*", 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f);
         $openMode = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '','cbc', '');
         $blockSize = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, 'cbc');
-        $plainPad = pkcs5_pad($plainText, $blockSize);
+        $plainPad = $this->pkcs5_pad($plainText, $blockSize);
         if (mcrypt_generic_init($openMode, $secretKey, $initVector) != -1) 
         {
               $encryptedText = mcrypt_generic($openMode, $plainPad);
@@ -606,9 +617,9 @@ class offerRideRepository
 
     function decrypt($encryptedText,$key)
     {
-        $secretKey = hextobin(md5($key));
+        $secretKey = $this->hextobin(md5($key));
         $initVector = pack("C*", 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f);
-        $encryptedText=hextobin($encryptedText);
+        $encryptedText=$this->hextobin($encryptedText);
         $openMode = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '','cbc', '');
         mcrypt_generic_init($openMode, $secretKey, $initVector);
         $decryptedText = mdecrypt_generic($openMode, $encryptedText);
@@ -655,8 +666,8 @@ class offerRideRepository
     function encrypteData($dd)
     {
         $merchant_data='';
-        $working_key='D8D17336E34ECFE458CCE9D13EE7E640';//Shared by CCAVENUES
-        $access_code='AVKF65DF69BB16FKBB';//Shared by CCAVENUES
+        $working_key='A087123D0EA8318575EA3EDDDF177F7E';//Shared by CCAVENUES
+        $access_code='AVUD66DH35AD37DUDA';//Shared by CCAVENUES
         foreach ($dd as $key => $value){
             $merchant_data.=$key.'='.$value.'&';
         }
@@ -669,41 +680,63 @@ class offerRideRepository
     {
         try
         {
-            $workingKey='D8D17336E34ECFE458CCE9D13EE7E640';     //Working Key should be provided here.
+            $workingKey='A087123D0EA8318575EA3EDDDF177F7E';     //Working Key should be provided here.
             $encResponse=$_POST["encResp"];         //This is the response sent by the CCAvenue Server
-            $rcvdString=decrypt($encResponse,$workingKey);      //Crypto Decryption used as per the specified working key.
+            $rcvdString=$this->decrypt($encResponse,$workingKey);      //Crypto Decryption used as per the specified working key.
             $order_status="";
             $decryptValues=explode('&', $rcvdString);
             $dataSize=sizeof($decryptValues);
-            echo "<center>";
-
+            //echo "<center>";
+            $data=array();
+            
             for($i = 0; $i < $dataSize; $i++) 
             {
                 $information=explode('=',$decryptValues[$i]);
+                $data[$information[0]]=$information[1];
                 if($i==3)   $order_status=$information[1];
             }
 
             if($order_status==="Success")
             {
-                echo "<br>Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
+                //echo "<br>Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
+                $paid_amount=$data['amount'];
+                $order_id=$data['order_id'];
+                $tracking_id=$data['tracking_id'];
+                $rideid=$data['merchant_param1'];
+                $offerType="create";
+                $userid=$data['merchant_param3'];
+
+                //change status of ride from 1 to 0..
+                $updateStatus=DB::table('rides')->where('id',$rideid)->where('userId',$userid)->update(['status'=>0,'order_id'=>$order_id,'tracking_id'=>$tracking_id,'paid_amount'=>$paid_amount]);
                 
+                //add amount 27.5 in admin wallet...
+                DB::table('admin_wallet')->insert(['rideId'=>$rideid,"userId"=>$userid,"amount"=>$paid_amount,"bookType"=>$offerType,"isDaily"=>1]);
+                //flash message set
+                $message="Your transaction has been successfully completed.Your ride offered successfully.";
+                session()->flash('offersuccess',$message);
+                //return redirect('/');
+
             }
             else if($order_status==="Aborted")
             {
-                echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
-            
+                //echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
+                $message="Your transaction has been Aborted.Please Try again to offer daily ride.";
+                session()->flash('offerfailure',$message);
             }
             else if($order_status==="Failure")
             {
-                echo "<br>Thank you for shopping with us.However,the transaction has been declined.";
+                $message="Your transaction has been declined.Please Try again to offer daily ride.";
+                session()->flash('offerfailure',$message);
+                //echo "<br>Thank you for shopping with us.However,the transaction has been declined.";
             }
             else
             {
-                echo "<br>Security Error. Illegal access detected";
-            
+                //echo "<br>Security Error. Illegal access detected";
+                $message="Your transaction has been declined.Please Try again to offer daily ride.";
+                session()->flash('offerfailure',$message);
             }
-
-            echo "<br><br>";
+            return redirect('/rideStatus');
+            /*echo "<br><br>";
 
             echo "<table cellspacing=4 cellpadding=4>";
             for($i = 0; $i < $dataSize; $i++) 
@@ -713,7 +746,7 @@ class offerRideRepository
             }
 
             echo "</table><br>";
-            echo "</center>";
+            echo "</center>";*/
         }
         catch(\Exception $e)
         {

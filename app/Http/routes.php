@@ -17,15 +17,19 @@ Route::group(['middleware' => ['web']], function () {
         'as'    =>  'get.city.name',
         'uses'  =>  'userController@getCityName'
     ]);
+    Route::get('/rideStatus',[
+        'as'    =>  'get.ride.status',
+        'uses'  =>  'rideController@statusMessage'
+    ]);
     Route::get('/', [
         'as'    =>  'get.login',
         'uses'  =>  'loginController@getLogin'
     ])->middleware(['before']);
     //when click on login page
-    Route::get('/login',[
+   /* Route::get('/login',[
         'as'    =>  'get.login',
         'uses'  =>  'loginController@getLogin'
-    ]);
+    ]);*/
 
     Route::get('/signup',function(){
         return redirect('/');
@@ -138,6 +142,7 @@ Route::group(['middleware'=>['web','login']],function(){
     ]);
 
     Route::get('/logout',function(){
+        DB::table('device_token')->where('users_id', '=', session('userId'))->delete();
         session()->flush();
         if (isset($_SERVER['HTTP_COOKIE']))
         {
@@ -151,6 +156,7 @@ Route::group(['middleware'=>['web','login']],function(){
                 unset($_COOKIE[$name]);
             }
         }
+
         return redirect('/');
     });
 
@@ -356,9 +362,10 @@ Route::group(['middleware'=>['web','login']],function(){
         'uses'  =>  'userController@withdrawAmount'
     ]);
 
-    Route::get('/bookedRidePaymentMessage',function () {
-        return view('bookedRidePaymentMessage');
-    });
+    Route::get('/bookedRidePaymentMessage',[
+        'as'    =>  'booked.payment.status',
+        'uses'  =>  'rideController@bookedRidePaymentMessage'
+    ]);
 
     Route::put('/changePassword',[
         'as'    =>  'update.password',

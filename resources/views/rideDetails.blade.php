@@ -408,6 +408,7 @@ $(document).ready(function(){
         $.toaster({ priority : 'success', title : 'Title', message : '{{ Session::get('status') }}'});
     @endif
     $(".contact-modal").click(function(){
+        $("#paybtn").removeAttr("disabled");
         $("#seats").empty();
         $("#cost_seat").text(0);
         $("#tax_cost").text(0);
@@ -486,6 +487,7 @@ $(document).ready(function(){
             $("#total_cost").val("27.5"); 
         }
     });
+    //when click on payment
     $("#paymentForm").submit(function(e){
         var dd=$("#pay_wallet").is(':checked');
         if(dd==false)
@@ -543,6 +545,7 @@ $(document).ready(function(){
                 },
                 error:function(response)
                 {
+                    $("#paybtn").removeAttr("disabled");
                     var a=$.parseJSON(response['responseText']);
                     $.toaster({ priority : 'danger', title : 'Title', message :a['message']});
                 },

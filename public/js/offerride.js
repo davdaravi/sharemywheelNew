@@ -15,6 +15,7 @@ $('#return,#daily').change(function()
 	$("#returnMin").val("0");
 	if($("#return").is(":checked") && $("#daily").is(":checked"))
 	{
+		$("#dailynote").text('Note: You have to pay 25 Rs. to offer a daily ride.');
 		$("#todate_error").text('');
 		$("#returnDateDiv").css("display","none");
 		$("#returnHourDiv").css("display","block");	
@@ -22,6 +23,7 @@ $('#return,#daily').change(function()
 	}
 	if($("#return").is(":checked") && !($("#daily").is(":checked")))
 	{
+		$("#dailynote").text('');
 		$("#todate_error").text('');
 		$("#returnDateDiv").css("display","block");
 		$("#returnHourDiv").css("display","none");	
@@ -29,6 +31,7 @@ $('#return,#daily').change(function()
 	}
 	if(!($("#return").is(":checked")) && $("#daily").is(":checked"))
 	{
+		$("#dailynote").text('Note: You have to pay 25 Rs. to offer a daily ride.');
 		$("#todate_error").text('');
 		$("#returnDateDiv").css("display","none");
 		$("#returnHourDiv").css("display","none");	
@@ -36,6 +39,7 @@ $('#return,#daily').change(function()
 	}
 	if(!($("#return").is(":checked")) && !($("#daily").is(":checked")))
 	{
+		$("#dailynote").text('');
 		$("#todate_error").text('');
 		$("#returnDateDiv").css("display","none");
 		$("#returnHourDiv").css("display","none");	
@@ -625,7 +629,7 @@ $("#offerForm").submit(function(e){
 	    	var am=$("#walletamount").text();
 	    	$("#wallet_amount_balance").text(am);
 	    	$("#dailyride").modal('show');
-
+	    	$("#paybtn").removeAttr("disabled");
 	    }
 	    else
 	    {
@@ -994,6 +998,7 @@ offerride.responsOfferRide=function(resp,param)
 		{
 			$.toaster({ priority : resp['class'], title : 'Title', message : resp['message']});
 			$("#offerForm")[0].reset();
+			$("#dailynote").text('');
 			$("#returnDateDiv").css("display","block");
 			offerride.startCity=1;
 			offerride.placearray=[];

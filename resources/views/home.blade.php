@@ -11,8 +11,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="bannerImage">
-            <img src="images/slider1.png" class="bannerImg"/>
-            <div id="slider-pattern"></div>
+            <img src="{{asset('/images/banner1.png')}}" class="bannerImg"/>
+            <!-- <div id="slider-pattern"></div> -->
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
 
         
         <div class="col-md-12">
-            <h3>Book a Car</h3>
+            <h3>Book my vehicle</h3>
         </div>
         <div class="clearfix"></div><hr/>
         <form role="form" method="POST" action="{{route('post.ride.search')}}">
@@ -66,9 +66,9 @@
         </form>
     </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-4 carImages">
+    <!-- <div class="col-xs-12 col-sm-6 col-md-4 carImages">
         <img src="images/slider_front_img.png">
-    </div>
+    </div> -->
 </div>
 <div class="clearfix"></div>
 

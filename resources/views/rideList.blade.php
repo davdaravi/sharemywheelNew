@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <style type="text/css">
     .PD10{padding-left: 10px !important;}
+    .dataTables_scrollBody{height: auto !important}
     div.stars,div.stars1
     {
         width: 92px;
@@ -178,7 +179,7 @@ var comfortArray=Array();
 var numberNotChecked =$('input[name="carComfort[]"]').not(':checked').length;
 
 $(document).ready(function() {
-    @if(isset($_COOKIE['fromcity']))
+    /*@if(isset($_COOKIE['fromcity']))
         alert("fromcity"+'{{$_COOKIE['fromcity']}}');
     @endif
 
@@ -201,7 +202,7 @@ $(document).ready(function() {
     @if(isset($_COOKIE['tooriginal']))
         alert("tooriginal"+'{{$_COOKIE['tooriginal']}}');
     @endif
-
+*/
     $("input[name='ridetype']").click(function(){
         rideTable.fnDraw();
     });
@@ -567,7 +568,7 @@ function getCityName(lat,lng,part)
 });
 */
 $( window ).load(function() {
-  $('#ridelist tbody tr td:first-child').addClass('profileBlock');
+    //$('#ridelist tbody tr td:first-child').addClass('profileBlock');
 });
 </script>
 @endsection

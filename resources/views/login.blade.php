@@ -3,6 +3,34 @@
 @section("head")
     <title>Share My Wheel - login</title>
     <link href="{{URL::asset('css/jquery.bxslider.css')}}" rel="stylesheet">
+    <style type="text/css">
+    #slider {
+        list-style:none;
+        padding:0px;
+        margin-top: 10px;
+    }
+
+    .slider-container { 
+        width:100% !important; 
+        height:170px!important;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px; 
+    }
+
+    #slider img { 
+        width:300px!important; 
+        height:155px!important; 
+        margin:0px; 
+        display:inline-block  
+    }
+
+    #slider li {
+        width:315px;
+        text-align: center !important; 
+    }
+    .pager{ margin: 0px !important;}
+    </style>
 @endsection
 @section("nav")
     @include("includes.beforeLoginSidebar")
@@ -12,16 +40,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="bannerImage">
-            <img src="images/slider1.png" class="bannerImg"/>
-            <div id="slider-pattern"></div>
+            <img src="{{asset('/images/banner2.png')}}" class="bannerImg"/>
+            
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="col-xs-12 col-sm-6 col-md-4 carImages">
-        <img src="images/slider_front_img.png">
-    </div>
-</div>
+
 <div class="clearfix"></div>
 <!-- <div class="container">
     <div class="col-xs-12 col-sm-6 col-md-4 searchForm">
@@ -63,7 +87,7 @@
     </div>
 </div>
 <div class="clearfix"></div> -->
-<div class="container margin-top-25 blocks" style="margin-bottom:0px">
+<!-- <div class="container margin-top-25 blocks" style="margin-bottom:0px">
     <div class="col-md-12 text-center">
         <div class="col-xs-12 col-sm-3 col-md-3 block">
             <i class="zmdi zmdi-movie-alt zmdi-hc-2x"></i>
@@ -85,10 +109,19 @@
             <p class="margin-top-10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's </p>
         </div>
     </div>
-</div>
+</div> -->
 
 @if(count($ad)>0)
-<div class="container" style="margin-bottom:50px">
+<div class="slider-container">
+    <ul id="slider">
+        @for($i=0;$i<count($ad);$i++)
+        <li><a href="{{$ad[$i]->url}}" target="_blank"><img src="{{asset($ad[0]->image_path)}}"></a></li>
+        @endfor
+    </ul>
+</div>
+@endif
+<!-- @if(count($ad)>0)
+<div class="container">
     <div class="col-md-12">
         <div class="slider2">
             @for($i=0;$i<count($ad);$i++)
@@ -97,7 +130,7 @@
         </div>
     </div>
 </div>
-@endif
+@endif -->
 <div class="clearfix"></div>
 @include('loginModal')
 @endsection
@@ -155,48 +188,16 @@
 
         var autocomplete,autocomplete1;
         $(document).ready(function(){
-            if($(window).width() < 330){
-                $('.slider2').bxSlider({
-                    slideWidth:315,
-                    minSlides: 1,
-                    maxSlides:10,
-                    slideMargin: 10
-                });
-            }
-            else if($(window).width() < 480){
-                $('.slider2').bxSlider({
-                    slideWidth:400,
-                    minSlides: 2,
-                    maxSlides:10,
-                    slideMargin: 10
-                });
-            }
-            else if ($(window).width() < 600) { 
-                $('.slider2').bxSlider({
-                    slideWidth:170,
-                    minSlides: 2,
-                    maxSlides:10,
-                    slideMargin: 10
-                });
-            }
-            else if ($(window).width() < 767) { 
-                $('.slider2').bxSlider({
-                    slideWidth:200,
-                    minSlides: 2,
-                    maxSlides:10,
-                    slideMargin: 10
-                });
-            }
-            else{
-                $('.slider2').bxSlider({
-                    slideWidth: 220,
-                    minSlides: 5,
-                    maxSlides:5,
-                    slideMargin: 10,
-                    auto: true,
-                    autoControls: true
-                  });
-            }
+            $('#slider').bxSlider({
+                ticker: true,
+                tickerSpeed: 1500,
+                tickerHover: true
+            });
+            /*$('.slider2').bxSlider({
+                ticker:true,
+                tickerSpeed:5,
+                tickerHover:true
+            });*/
          //   initialize();
             $('#rideFindDatepicker').datetimepicker({
                 lang:'ch',
@@ -204,7 +205,9 @@
                 format:'d-m-Y',
                 minDate:'-1970/01/01', // yesterday is minimum date
             });
-
+            $('#forgotPassword').on('hidden.bs.modal', function () {
+                $('body').css('padding-right','0px');
+            });
             $(".frgpassword").click(function(){
                 $("#loginModal").modal('hide');
                 $("#forgotPassword").modal('show');

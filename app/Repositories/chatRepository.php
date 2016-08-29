@@ -197,8 +197,17 @@ class chatRepository
 
 
                 $profilepic=DB::table('users')->select('profile_pic')->where('id',$userid)->get();
+                $finalprofilepic=$profilepic[0]->profile_pic;
+                if($finalprofilepic=='default.png')
+                {
+                    $ff='/images/default.png';
+                }
+                else
+                {
+                    $ff="/images/profile/".$userid."/".$finalprofilepic;
+                }
                 $data=array();
-                $data[0]=$profilepic;
+                $data[0]=$ff;
                 $data[1]=$chatData;             
                 //$data[]=$allMessage;
                 $errors=array();
