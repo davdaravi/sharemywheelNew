@@ -272,4 +272,14 @@ class facebookController extends Controller
             redirect('/');
         }
     }
+    /*public function getGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function getFeedbackGoogle()
+    {
+        $user = Socialite::driver('google')->user();
+        print_r($user);
+        exit;
+    }*/
 }

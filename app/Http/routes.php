@@ -65,6 +65,16 @@ Route::group(['middleware' => ['web']], function () {
         'uses'  =>  'gitController@githubresponse'
     ]);
 
+    /*Route::get('/google',[
+        'as'    =>  'get.google',
+        'uses'  =>  'facebookController@getGoogle'
+    ]);
+
+    Route::get('/callback',[
+        'as'    =>  'get.feedback.google',
+        'uses'  =>  'facebookController@getFeedbackGoogle'
+    ]);
+*/
     Route::get('/terms_condition',function(){
         return view('termsCondition');
     });

@@ -22,7 +22,6 @@
                 	<li><a href="#" class="dropdown-toggle login" data-toggle="modal" data-target="#loginModal">Login</a></li>
                     <li><a href="#" class="dropdown-toggle signup" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li>
                     <li><a href="{{url('/facebook')}}" class="dropdown-toggle header-facebook"><i class="zmdi zmdi-facebook"></i></a></li>
-                   
                 </ul>
             </div>
             <!--/.nav-collapse -->
