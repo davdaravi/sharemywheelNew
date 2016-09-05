@@ -766,4 +766,161 @@ class dashboardRepository
             return response($response,401);
         }
     }
+
+     //function for request coupan code
+    public function addCoupanCode()
+    {
+        try
+        {
+            if(\Session::has('userId'))
+            {
+                $param=$this->request->all();
+                $date=date("Y-m-d");
+                if(isset($param['code']))
+                {
+                    if($param['code']=="")
+                    {
+                        //error
+                        $errors[]="Coupancode is required";
+                        $response['message'] = "Coupancode is required";
+                        $response['errormessage'] = $errors;
+                        $response['status'] = false;
+                        $response['data'] = array();
+                        return response($response,401);
+                    }
+                    else
+                    {
+                        $findcoupan=DB::table('coupan_code')
+                                ->where('coupan_code','LIKE',$param['code'])
+                                ->where('is_deleted',0)
+                                ->get();
+                                
+                        if(count($findcoupan)>0)
+                        {
+                           
+                            //check if user has already avail this coupan code or not
+                            $checkUserCoupan=DB::table('user_coupan_code')->where('coupanId',$findcoupan[0]->id)->get();
+                            if(count($checkUserCoupan)>0)
+                            {
+                                $errors[]="Coupan code has already been used.";
+                                $response['message'] = "Coupan code has already been used.";
+                                $response['errormessage'] = $errors;
+                                $response['status'] = false;
+                                $response['data'] = array();
+                                return response($response,401);
+                            }
+                            else
+                            {
+                                DB::beginTransaction();
+                                $insert_user_coupan=array("userId"=>session('userId'),"coupanId"=>$findcoupan[0]->id,"amount"=>$findcoupan[0]->amount);
+                                $insert=DB::table('user_coupan_code')->insert($insert_user_coupan);
+                                if($insert)
+                                {
+                                    $selectUserWallet=DB::table('payment_wallete')->where('userId',session('userId'))->get();
+                                    if(count($selectUserWallet)>0)
+                                    {
+                                        $newAmount=$findcoupan[0]->amount+$selectUserWallet[0]->amount;
+                                        $updateAmount=DB::table('payment_wallete')->where('userId',session('userId'))->update(['amount'=>$newAmount]);
+                                        if($updateAmount)
+                                        {
+                                            DB::commit();
+                                            $response['data'] = array("amount"=>$newAmount);
+                                            $response['erromessage']=array();
+                                            $response['message'] = "Congratulations.You won ".$findcoupan[0]->amount." Rs. in your wallet.";
+                                            $response['status'] = true;
+                                            return response($response,200);
+                                        }
+                                        else
+                                        {
+                                            //error
+                                            DB::rollback();
+                                            $errors[]="Please try again";
+                                            $response['message'] = "Please try again";
+                                            $response['errormessage'] = $errors;
+                                            $response['status'] = false;
+                                            $response['data'] = array();
+                                            return response($response,401);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        $insertAmount=DB::table('payment_wallete')->insert(['userId'=>session('userId'),'amount'=>$findcoupan[0]->amount]);    
+                                        if($insertAmount)
+                                        {
+                                            DB::commit();
+                                            $response['data'] = array("amount"=>$findcoupan[0]->amount);
+                                            $response['erromessage']=array();
+                                            $response['message'] = "Congratulations.You won ".$findcoupan[0]->amount." Amount in your wallet.";
+                                            $response['status'] = true;
+                                            return response($response,200);
+                                        }
+                                        else
+                                        {
+                                            //error
+                                            DB::rollback();
+                                            $errors[]="Please try again";
+                                            $response['message'] = "Please try again";
+                                            $response['errormessage'] = $errors;
+                                            $response['status'] = false;
+                                            $response['data'] = array();
+                                            return response($response,401);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    DB::commit();
+                                    $errors[]="Please try again";
+                                    $response['message'] = "Please try again";
+                                    $response['errormessage'] = $errors;
+                                    $response['status'] = false;
+                                    $response['data'] = array();
+                                    return response($response,401);
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+                            $errors[]="Coupancode is wrong";
+                            $response['message'] = "Coupancode is wrong";
+                            $response['errormessage'] = $errors;
+                            $response['status'] = false;
+                            $response['data'] = array();
+                            return response($response,401);
+                        }
+                    }
+                }
+                else
+                {
+                    //error
+                    $errors[]="Coupancode is required";
+                    $response['message'] = "Coupancode is required";
+                    $response['errormessage'] = $errors;
+                    $response['status'] = false;
+                    $response['data'] = array();
+                    return response($response,401);
+                }
+            }
+            else
+            {
+                $errors[]="Please try again";
+                $response['message'] = "Please try again";
+                $response['errormessage'] = $errors;
+                $response['status'] = false;
+                $response['data'] = array();
+                return response($response,401);    
+            }
+        }
+        catch(\Exception $e)
+        {
+            \Log::error('addCoupan function error'.$e->getMessage());
+            $errors[]="Please try again";
+            $response['message'] = "Please try again";
+            $response['errormessage'] = $errors;
+            $response['status'] = false;
+            $response['data'] = array();
+            return response($response,401);
+        }
+    }
 }

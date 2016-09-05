@@ -34,8 +34,12 @@ class dashboardController extends Controller
         return $dashboardRepository->rideBookHistory();
     }
     //function for add coupan code
-    public function addCoupan(dashboardRepository $dashboardRepository)
+    /*public function addCoupan(dashboardRepository $dashboardRepository)
     {
         return $dashboardRepository->addCoupan();
+    }*/
+    public function addCoupanCode(dashboardRepository $dashboardRepository)
+    {
+        return $dashboardRepository->addCoupanCode();
     }
 }

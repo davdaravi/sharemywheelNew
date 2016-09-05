@@ -136,6 +136,8 @@ Route::group(['middleware'=>['web','login','token']],function(){
 
 Route::group(['middleware'=>['web','login']],function(){
 
+    Route::get('/addCoupanCode','CoupanController@addCoupanCode');
+
     Route::get('/findride', [
         'as'    =>  'get.find.ride',
         'uses'  =>  'rideController@findride'
@@ -357,9 +359,14 @@ Route::group(['middleware'=>['web','login']],function(){
         'uses'  =>  'dashboardController@rideBookHistory'
     ]);
 
-    Route::post('/addCoupan',[
+    /*Route::post('/addCoupan',[
         'as'    =>  'post.coupan.code',
         'uses'  =>  'dashboardController@addCoupan'
+    ]);*/
+
+    Route::post('/addCoupan',[
+        'as'    =>  'post.coupan.code',
+        'uses'  =>  'dashboardController@addCoupanCode'
     ]);
 
     Route::post('/getsuccessPayment',[

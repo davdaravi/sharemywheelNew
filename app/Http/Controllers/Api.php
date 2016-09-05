@@ -4554,21 +4554,21 @@ class Api extends BaseController
                 }
                 //check if coupan code is exists or not
                 $findcoupan=DB::table('coupan_code')
-                            ->where('coupan_code',$param['coupancode'])
+                            ->where('coupan_code','like',$param['coupancode'])
                             ->where('is_deleted',0)
                             ->get();
                             
                 if(count($findcoupan)>0)
                 {
                     //check weather coupan is expired or not
-                    if($findcoupan[0]->start_date<=$date && $findcoupan[0]->end_date>=$date)
-                    {
+                    /*if($findcoupan[0]->start_date<=$date && $findcoupan[0]->end_date>=$date)
+                    {*/
                         //check if user has already avail this coupan code or not
-                        $checkUserCoupan=DB::table('user_coupan_code')->where('userId',$userId)->where('coupanId',$findcoupan[0]->id)->get();
+                        $checkUserCoupan=DB::table('user_coupan_code')->where('coupanId',$findcoupan[0]->id)->get();
                         if(count($checkUserCoupan)>0)
                         {
-                            $errors[]="you have already avail this coupancode";
-                            $response['message'] = "you have already avail this offer";
+                            $errors[]="Coupancode has already been used.";
+                            $response['message'] = "Coupancode has already been used.";
                             $response['errormessage'] = $errors;
                             $response['status'] = false;
                             $response['data'] = array();
@@ -4643,7 +4643,7 @@ class Api extends BaseController
                                 return response($response,401);
                             }
                         }
-                    }
+                    /*}
                     else
                     {
                         //coupan expired
@@ -4653,7 +4653,7 @@ class Api extends BaseController
                         $response['status'] = false;
                         $response['data'] = array();
                         return response($response,401);
-                    }
+                    }*/
                 }
                 else
                 {
