@@ -16,8 +16,8 @@
 						|
 						<li><a href="/refund">Refund</a></li>
 						|
-						<li><a href="/coupan">Coupan</a></li>
-						|
+						<!-- <li><a href="/coupan">Coupan</a></li>
+						| -->
 						<li><a href="/latest_news">Latest News</a></li>
 					</ul>
 				</div>
