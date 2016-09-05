@@ -106,10 +106,10 @@ Route::group(['middleware' => ['web']], function () {
         'uses'  =>  'userController@latest_news'
     ]);
 
-    Route::get('/coupan',[
+    /*Route::get('/coupan',[
         'as'    =>  'get.coupan',
         'uses'  =>  'userController@coupanCode'
-    ]);
+    ]);*/
 
     Route::get('/refund',function(){
         return view('returnCancellation');
@@ -152,7 +152,7 @@ Route::group(['middleware'=>['web','login']],function(){
     ]);
 
     Route::get('/logout',function(){
-        DB::table('device_token')->where('users_id', '=', session('userId'))->delete();
+        //DB::table('device_token')->where('users_id', '=', session('userId'))->delete();
         session()->flush();
         if (isset($_SERVER['HTTP_COOKIE']))
         {
